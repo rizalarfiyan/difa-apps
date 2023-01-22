@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { classNames } from '../utils'
+import { classNames } from '@utils'
 
 function Spinner({ className, size, ...rest }) {
   const getSize = useMemo(() => {

@@ -14,6 +14,20 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@', './src'],
+          ['@components', './src/components'],
+          ['@pages', './src/pages'],
+          ['@styles', './src/styles'],
+          ['@utils', './src/utils'],
+        ],
+        extensions: ['.js', '.jsx', '.json'],
+      },
+    },
+  },
   rules: {
     'react/prefer-stateless-function': 0,
     'jsx-a11y/label-has-associated-control': 0,

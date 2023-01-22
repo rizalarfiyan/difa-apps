@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "lint": "npm run prettier && npm run eslint",
     "check": "npm run prettier:check && npm run eslint:check",
     "eslint": "eslint --ignore-path .gitignore --max-warnings=0 . --ext .js,.jsx,.ts,.tsx --fix",
@@ -15,6 +15,7 @@
     "prettier:check": "prettier --ignore-path .gitignore --check ./src"
   },
   "dependencies": {
+    "@craco/craco": "^7.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,9 +24,11 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "craco-alias": "^3.0.1",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
