@@ -6,7 +6,8 @@
       "@components": ["./components"],
       "@pages": ["./pages"],
       "@styles": ["./styles"],
-      "@utils": ["./utils"]
+      "@utils": ["./utils"],
+      "@constants": ["./constants"]
     }
   },
   "exclude": ["node_modules"]
