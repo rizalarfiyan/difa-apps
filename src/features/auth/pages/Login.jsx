@@ -3,12 +3,8 @@ import { ROUTE } from '@constants'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as Yup from 'yup'
-
-const loginShema = Yup.object({
-  email: Yup.string().label('Email').email().required(),
-  password: Yup.string().label('Password').required().min(5).max(255),
-})
+import schema from '../schema'
+import services from '../services'
 
 function Login() {
   const formValue = {
@@ -16,8 +12,18 @@ function Login() {
     password: '',
   }
 
-  const handleSubmit = (values) => {
-    return values
+  const [login, loginState] = services.useLoginMutation()
+  const [userInfo, userInfoState] = services.useUserInfoMutation()
+  const isLoading = loginState.isLoading || userInfoState.isLoading
+
+  const handleSubmit = async (values, formik) => {
+    try {
+      await login(values).unwrap()
+      await userInfo(values).unwrap()
+    } catch (err) {
+      // console.error(err)
+    }
+    formik.setSubmitting(false)
   }
 
   return (
@@ -26,7 +32,7 @@ function Login() {
         <Formik
           initialValues={formValue}
           onSubmit={handleSubmit}
-          validationSchema={loginShema}
+          validationSchema={schema.login}
         >
           {({
             values,
@@ -65,7 +71,7 @@ function Login() {
                   isSubmit
                   isFluid
                   disabled={!(isValid && dirty)}
-                  isLoading={isSubmitting}
+                  isLoading={isSubmitting || isLoading}
                   rightIcon={<Icon name='login' className='ml-2 h-5 w-5' />}
                 >
                   Login

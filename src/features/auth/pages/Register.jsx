@@ -3,17 +3,8 @@ import { ROUTE } from '@constants'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as Yup from 'yup'
-
-const registerShema = Yup.object({
-  name: Yup.string().label('Name').required(),
-  email: Yup.string().label('Email').email().required(),
-  password: Yup.string().label('Password').required().min(5).max(255),
-  password_confirmation: Yup.string()
-    .label('Password Confirmation')
-    .required()
-    .oneOf([Yup.ref('password'), null], 'Password must match'),
-})
+import schema from '../schema'
+import services from '../services'
 
 function Register() {
   const formValue = {
@@ -23,8 +14,16 @@ function Register() {
     password_confirmation: '',
   }
 
-  const handleSubmit = (values) => {
-    return values
+  const [register, { isLoading }] = services.useRegisterMutation()
+
+  const handleSubmit = async (values, formik) => {
+    const { name, email, password } = values
+    try {
+      await register({ name, email, password }).unwrap()
+    } catch (err) {
+      // console.error(err)
+    }
+    formik.setSubmitting(false)
   }
 
   return (
@@ -33,7 +32,7 @@ function Register() {
         <Formik
           initialValues={formValue}
           onSubmit={handleSubmit}
-          validationSchema={registerShema}
+          validationSchema={schema.register}
         >
           {({
             values,
@@ -94,7 +93,7 @@ function Register() {
                   isSubmit
                   isFluid
                   disabled={!(isValid && dirty)}
-                  isLoading={isSubmitting}
+                  isLoading={isSubmitting || isLoading}
                   rightIcon={<Icon name='register' className='ml-2 h-5 w-5' />}
                 >
                   Register

@@ -24,6 +24,8 @@ module.exports = {
           ['@styles', './src/styles'],
           ['@utils', './src/utils'],
           ['@constants', './src/constants'],
+          ['@features', './src/features'],
+          ['@lib', './src/lib'],
         ],
         extensions: ['.js', '.jsx', '.json'],
       },
@@ -37,5 +39,6 @@ module.exports = {
     'import/no-cycle': 0,
     'no-nested-ternary': 0,
     'react/forbid-prop-types': 0,
+    'no-param-reassign': 0,
   },
 }

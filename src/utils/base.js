@@ -1,3 +1,5 @@
+import React from 'react'
+
 const classNames = (...args) => args.filter(Boolean).join(' ')
 
 const getYear = () => {
@@ -19,4 +21,12 @@ const routeReplace = (path, ...url) => {
   }, path)
 }
 
-export { classNames, getYear, routeReplace }
+function lazyImport(factory, name) {
+  return Object.create({
+    [name]: React.lazy(() =>
+      factory().then((module) => ({ default: module[name] }))
+    ),
+  })
+}
+
+export { classNames, getYear, routeReplace, lazyImport }
