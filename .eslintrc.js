@@ -26,6 +26,7 @@ module.exports = {
           ['@constants', './src/constants'],
           ['@features', './src/features'],
           ['@lib', './src/lib'],
+          ['@hooks', './src/hooks'],
         ],
         extensions: ['.js', '.jsx', '.json'],
       },
@@ -40,5 +41,6 @@ module.exports = {
     'no-nested-ternary': 0,
     'react/forbid-prop-types': 0,
     'no-param-reassign': 0,
+    'import/prefer-default-export': 0,
   },
 }

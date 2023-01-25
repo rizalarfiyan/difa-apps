@@ -9,7 +9,8 @@
       "@utils": ["./utils"],
       "@constants": ["./constants"],
       "@features": ["./features"],
-      "@lib": ["./lib"]
+      "@lib": ["./lib"],
+      "@hooks": ["./hooks"]
     }
   },
   "exclude": ["node_modules"]

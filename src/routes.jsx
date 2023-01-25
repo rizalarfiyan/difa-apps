@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom'
 import { auth } from '@features'
 import Pages from '@pages'
 import { ROUTE } from '@constants'
-import { Error, Layouts } from './components'
+import { Error, GuardedRoute, Layouts } from '@components'
 
 function AppRoutes() {
   return useRoutes([
@@ -11,12 +11,17 @@ function AppRoutes() {
       element: <Layouts.BaseLayout />,
       children: [
         {
-          path: ROUTE.login,
-          element: <auth.pages.Login />,
-        },
-        {
-          path: ROUTE.register,
-          element: <auth.pages.Register />,
+          element: <GuardedRoute redirectAuth />,
+          children: [
+            {
+              path: ROUTE.login,
+              element: <auth.pages.Login />,
+            },
+            {
+              path: ROUTE.register,
+              element: <auth.pages.Register />,
+            },
+          ],
         },
         {
           path: ROUTE.threads,

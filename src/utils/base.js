@@ -21,7 +21,7 @@ const routeReplace = (path, ...url) => {
   }, path)
 }
 
-function lazyImport(factory, name) {
+const lazyImport = (factory, name) => {
   return Object.create({
     [name]: React.lazy(() =>
       factory().then((module) => ({ default: module[name] }))
@@ -29,4 +29,15 @@ function lazyImport(factory, name) {
   })
 }
 
-export { classNames, getYear, routeReplace, lazyImport }
+const validAuth = (token) => {
+  if (!token) return false
+  try {
+    const getToken = JSON.parse(atob(token.split('.')[1]))
+    if (getToken.exp * 1000 < Date.now()) return false
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+export { classNames, getYear, routeReplace, lazyImport, validAuth }

@@ -19,10 +19,11 @@ function Login() {
   const handleSubmit = async (values, formik) => {
     try {
       await login(values).unwrap()
-      await userInfo(values).unwrap()
+      await userInfo().unwrap()
     } catch (err) {
       // console.error(err)
     }
+
     formik.setSubmitting(false)
   }
 

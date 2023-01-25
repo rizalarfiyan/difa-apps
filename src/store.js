@@ -5,7 +5,7 @@ import { auth } from '@features'
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    auth: auth.slice,
+    auth: auth.slice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(api.middleware)

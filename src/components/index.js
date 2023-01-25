@@ -8,6 +8,7 @@ import Link from './Link'
 import MainContainer from './MainContainer'
 import CardInput from './CardInput'
 import Input from './Input'
+import GuardedRoute from './GuardedRoute'
 import Button from './Button'
 import Icon from './Icon'
 
@@ -22,6 +23,7 @@ export {
   MainContainer,
   CardInput,
   Input,
+  GuardedRoute,
   Error,
   Layouts,
 }
