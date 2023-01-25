@@ -1,11 +1,19 @@
-import React from 'react'
-import { useRoutes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useLocation, useRoutes } from 'react-router-dom'
 import { auth } from '@features'
 import Pages from '@pages'
 import { ROUTE } from '@constants'
 import { Error, GuardedRoute, Layouts } from '@components'
+import { progress } from '@lib'
 
 function AppRoutes() {
+  const location = useLocation()
+
+  useEffect(() => {
+    progress.start()
+    progress.done()
+  }, [location.pathname])
+
   return useRoutes([
     {
       element: <Layouts.BaseLayout />,
