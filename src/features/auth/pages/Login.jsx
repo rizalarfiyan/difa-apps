@@ -1,5 +1,6 @@
 import { Button, CardInput, Icon, Input, MainContainer } from '@components'
 import { ROUTE } from '@constants'
+import { useNotification } from '@hooks'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -15,13 +16,15 @@ function Login() {
   const [login, loginState] = services.useLoginMutation()
   const [userInfo, userInfoState] = services.useUserInfoMutation()
   const isLoading = loginState.isLoading || userInfoState.isLoading
+  const notification = useNotification()
 
   const handleSubmit = async (values, formik) => {
     try {
       await login(values).unwrap()
       await userInfo().unwrap()
+      notification.success('Success Login!')
     } catch (err) {
-      // console.error(err)
+      notification.error(err)
     }
 
     formik.setSubmitting(false)

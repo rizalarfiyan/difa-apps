@@ -1,5 +1,6 @@
 import { Button, CardInput, Icon, Input, MainContainer } from '@components'
 import { ROUTE } from '@constants'
+import { useNotification } from '@hooks'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -15,13 +16,15 @@ function Register() {
   }
 
   const [register, { isLoading }] = services.useRegisterMutation()
+  const notification = useNotification()
 
   const handleSubmit = async (values, formik) => {
     const { name, email, password } = values
     try {
       await register({ name, email, password }).unwrap()
+      notification.success('Success Register')
     } catch (err) {
-      // console.error(err)
+      notification.error(err)
     }
     formik.setSubmitting(false)
   }

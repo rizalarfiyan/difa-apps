@@ -4,12 +4,15 @@ import { Outlet } from 'react-router-dom'
 import { ROUTE } from '@constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '@features'
+import { useNotification } from '@hooks'
 
 function BaseLayout() {
   const getAuth = useSelector(auth.slice.state)
   const dispatch = useDispatch()
+  const notification = useNotification()
   const handleLogout = (event) => {
     dispatch(auth.slice.action.logout())
+    notification.success('Success Logout!')
     event.preventDefault()
   }
 
