@@ -40,4 +40,28 @@ const validAuth = (token) => {
   }
 }
 
-export { classNames, getYear, routeReplace, lazyImport, validAuth }
+const serializeQuery = (query) => {
+  return `?${Object.keys(query)
+    .reduce((acc, val) => {
+      acc.push(`${val}=${encodeURIComponent(query[val])}`)
+      return acc
+    }, [])
+    .join('&')}`
+}
+
+const getAvatar = (name) => {
+  return `https://ui-avatars.com/api/${serializeQuery({
+    name,
+    background: 'random',
+  })}`
+}
+
+export {
+  classNames,
+  getYear,
+  routeReplace,
+  lazyImport,
+  validAuth,
+  serializeQuery,
+  getAvatar,
+}

@@ -1,21 +1,9 @@
 import React from 'react'
-import { Button, Icon, Link, Navbar } from '@components'
+import { Icon, Link, Navbar, UserDropdown } from '@components'
 import { Outlet } from 'react-router-dom'
 import { ROUTE } from '@constants'
-import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '@features'
-import { useNotification } from '@hooks'
 
 function BaseLayout() {
-  const getAuth = useSelector(auth.slice.state)
-  const dispatch = useDispatch()
-  const notification = useNotification()
-  const handleLogout = (event) => {
-    dispatch(auth.slice.action.logout())
-    notification.success('Success Logout!')
-    event.preventDefault()
-  }
-
   return (
     <>
       <Navbar>
@@ -32,22 +20,7 @@ function BaseLayout() {
           >
             Leaderboards
           </Link>
-          {!getAuth.user ? (
-            <Link
-              to={ROUTE.login}
-              rightIcon={<Icon name='login' className='ml-2 h-5 w-5' />}
-            >
-              Login
-            </Link>
-          ) : (
-            <Button
-              type='button'
-              onClick={handleLogout}
-              rightIcon={<Icon name='logout' className='ml-2 h-5 w-5' />}
-            >
-              Logout
-            </Button>
-          )}
+          <UserDropdown />
         </div>
       </Navbar>
       <Outlet />

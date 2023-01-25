@@ -9,6 +9,7 @@ import MainContainer from './MainContainer'
 import CardInput from './CardInput'
 import Input from './Input'
 import GuardedRoute from './GuardedRoute'
+import UserDropdown from './UserDropdown'
 import Button from './Button'
 import Icon from './Icon'
 import Notification from './Notification'
@@ -25,6 +26,7 @@ export {
   CardInput,
   Input,
   GuardedRoute,
+  UserDropdown,
   Error,
   Layouts,
   Notification,
