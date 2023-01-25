@@ -4,10 +4,11 @@ import { auth } from '@features'
 import { storage, validAuth } from '@utils'
 import { STORAGE_KEY } from '@constants'
 import { LoadingScreen } from '@components'
-import { useAuth, useEffectOnce } from '@hooks'
+import { useAuth, useEffectOnce, useMode } from '@hooks'
 
 function GlobalProvider({ children }) {
   const { isLoggedIn, hasToken, logout, addToken } = useAuth()
+  const { getInitialMode, setMode } = useMode()
   const [userInfo, { isLoading }] = auth.services.useUserInfoMutation()
 
   const parseUserAuth = async () => {
@@ -27,6 +28,7 @@ function GlobalProvider({ children }) {
   }
 
   useEffectOnce(() => {
+    setMode(getInitialMode())
     parseUserAuth()
   })
 

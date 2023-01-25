@@ -11,6 +11,7 @@ const ROUTE = {
 
 const STORAGE_KEY = {
   token: 'token',
+  theme: 'theme',
 }
 
 const COMPONENTS = {
@@ -25,4 +26,9 @@ const COMPONENTS = {
   },
 }
 
-export { APP_NAME, API_BASE_URL, ROUTE, STORAGE_KEY, COMPONENTS }
+const MODE = {
+  dark: 'dark',
+  light: 'light',
+}
+
+export { APP_NAME, API_BASE_URL, ROUTE, STORAGE_KEY, COMPONENTS, MODE }
