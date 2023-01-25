@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { classNames } from '@utils'
 import { COMPONENTS } from '@constants'
+import { useEffectOnce } from '@hooks'
 import Icon from '../Icon'
 
 function NotificationMessage({ id, message, type, duration, onRemove }) {
@@ -40,13 +41,13 @@ function NotificationMessage({ id, message, type, duration, onRemove }) {
     }
   }, [])
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (duration && onRemove) {
       setTimeout(() => {
         onRemove(id)
       }, duration)
     }
-  }, [duration])
+  })
 
   return (
     <div

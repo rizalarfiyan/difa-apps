@@ -1,31 +1,31 @@
 import React from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
-import { auth } from '@features'
-import { useEffectOnce, useNotification } from '@hooks'
+import { useAuth, useEffectOnce, useNotification } from '@hooks'
 
 function GuardedRoute({ requireAuth, redirectAuth }) {
-  const getAuth = useSelector(auth.slice.state)
+  const { isLoggedIn } = useAuth()
   const location = useLocation()
-  const isRequiredAuth = !getAuth.user && requireAuth
-  const isAuth = getAuth.user && redirectAuth
   const notification = useNotification()
+  const cond = {
+    isRequiredAuth: !isLoggedIn && requireAuth,
+    isAuth: isLoggedIn && redirectAuth,
+  }
 
   useEffectOnce(() => {
-    if (isRequiredAuth) {
+    if (cond.isRequiredAuth) {
       notification.info('Login required!')
     }
-    if (isAuth) {
+    if (cond.isAuth) {
       notification.info('Already login!')
     }
   })
 
-  if (isRequiredAuth) {
+  if (cond.isRequiredAuth) {
     return <Navigate to='/login' state={{ from: location }} />
   }
 
-  if (isAuth) {
+  if (cond.isAuth) {
     return <Navigate to='/' replace />
   }
 

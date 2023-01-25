@@ -1,35 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '@features'
 import { storage, validAuth } from '@utils'
 import { STORAGE_KEY } from '@constants'
 import { LoadingScreen } from '@components'
-import { useEffectOnce } from '@hooks'
+import { useAuth, useEffectOnce } from '@hooks'
 
 function GlobalProvider({ children }) {
-  const getAuth = useSelector(auth.slice.state)
-  const dispatch = useDispatch()
+  const { isLoggedIn, hasToken, logout, addToken } = useAuth()
   const [userInfo, { isLoading }] = auth.services.useUserInfoMutation()
 
   const parseUserAuth = async () => {
     const getToken = storage.get(STORAGE_KEY.token)
     if (!validAuth(getToken)) {
-      dispatch(auth.slice.action.logout())
+      logout()
       return
     }
-    if (!getAuth.token) {
-      dispatch(
-        auth.slice.action.addToken({
-          token: getToken,
-        })
-      )
-    }
-    if (!getAuth.auth) {
+    if (!hasToken) addToken(getToken)
+    if (!isLoggedIn) {
       try {
         await userInfo().unwrap()
       } catch (err) {
-        dispatch(auth.slice.action.logout())
+        logout()
       }
     }
   }

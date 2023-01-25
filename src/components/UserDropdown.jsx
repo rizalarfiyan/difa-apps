@@ -1,14 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { classNames, getAvatar } from '@utils'
-import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '@features'
-import { useClickOutside, useNotification } from '@hooks'
+import { useAuth, useClickOutside, useNotification } from '@hooks'
 import { ROUTE } from '@constants'
 import { Link, Icon } from '@components'
 
 function UserDropdown() {
-  const getAuth = useSelector(auth.slice.state)
-  const dispatch = useDispatch()
+  const { isLoggedIn, user, logout } = useAuth()
   const notification = useNotification()
 
   const wrapperRef = useRef(null)
@@ -16,7 +13,7 @@ function UserDropdown() {
   const toggleDropdown = () => setIsOpen((prev) => !prev)
 
   const handleLogout = (event) => {
-    dispatch(auth.slice.action.logout())
+    logout()
     notification.success('Success Logout!')
     event.preventDefault()
   }
@@ -25,7 +22,7 @@ function UserDropdown() {
     setIsOpen(false)
   }, wrapperRef)
 
-  if (getAuth.user) {
+  if (isLoggedIn) {
     return (
       <div className='relative' ref={wrapperRef}>
         <div
@@ -33,7 +30,7 @@ function UserDropdown() {
           onClick={toggleDropdown}
           aria-hidden='true'
         >
-          <img src={getAvatar(getAuth.user.name)} alt={getAuth.user.name} />
+          <img src={getAvatar(user.name)} alt={user.name} />
         </div>
         <div
           className={classNames(
@@ -43,10 +40,10 @@ function UserDropdown() {
         >
           <div className='px-4 py-2'>
             <h4 className='truncate text-base font-medium text-gray-700 dark:text-gray-100'>
-              {getAuth.user.name}
+              {user.name}
             </h4>
             <p className='truncate text-sm text-gray-600 dark:text-gray-300'>
-              {getAuth.user.email}
+              {user.email}
             </p>
           </div>
           <ul className='py-1 text-left text-sm text-gray-700 dark:text-gray-200'>
