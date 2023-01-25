@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '@features'
 import { storage, validAuth } from '@utils'
 import { STORAGE_KEY } from '@constants'
 import { LoadingScreen } from '@components'
+import { useEffectOnce } from '@hooks'
 
 function GlobalProvider({ children }) {
   const getAuth = useSelector(auth.slice.state)
   const dispatch = useDispatch()
   const [userInfo, { isLoading }] = auth.services.useUserInfoMutation()
-  const isMounted = useRef(false)
 
   const parseUserAuth = async () => {
     const getToken = storage.get(STORAGE_KEY.token)
@@ -34,13 +34,9 @@ function GlobalProvider({ children }) {
     }
   }
 
-  useEffect(() => {
-    if (isMounted.current) {
-      parseUserAuth()
-      return
-    }
-    isMounted.current = true
-  }, [])
+  useEffectOnce(() => {
+    parseUserAuth()
+  })
 
   if (!isLoading) {
     return children
