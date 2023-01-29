@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useLocation, useRoutes } from 'react-router-dom'
-import { auth } from '@features'
+import { auth, leaderboards } from '@features'
 import Pages from '@pages'
 import { ROUTE } from '@constants'
 import { Error, GuardedRoute, Layouts } from '@components'
@@ -41,7 +41,7 @@ function AppRoutes() {
         },
         {
           path: ROUTE.leaderboards,
-          element: <Pages.Leaderboards />,
+          element: <leaderboards.pages.Leaderboards />,
         },
         {
           path: '*',
