@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import api from './services'
 
+const initialState = {
+  lists: [],
+}
+
 const slice = createSlice({
   name: 'leaderboards',
-  initialState: [],
+  initialState,
   extraReducers: (builder) => {
     builder.addMatcher(
       api.endpoints.leaderboards.matchFulfilled,
       (state, { payload }) => {
-        state = payload?.data?.leaderboards || []
+        state.lists = payload.data.leaderboards
       }
     )
   },

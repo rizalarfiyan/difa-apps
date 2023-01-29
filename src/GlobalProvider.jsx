@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { auth } from '@features'
 import { storage, validAuth } from '@utils'
@@ -7,6 +7,7 @@ import { LoadingScreen } from '@components'
 import { useAuth, useEffectOnce, useMode } from '@hooks'
 
 function GlobalProvider({ children }) {
+  const [isAvaliable, setIsAvaliable] = useState(false)
   const { isLoggedIn, hasToken, logout, addToken } = useAuth()
   const { getInitialMode, setMode } = useMode()
   const [userInfo, { isLoading }] = auth.services.useUserInfoMutation()
@@ -27,12 +28,13 @@ function GlobalProvider({ children }) {
     }
   }
 
-  useEffectOnce(() => {
-    setMode(getInitialMode())
-    parseUserAuth()
+  useEffectOnce(async () => {
+    await setMode(getInitialMode())
+    await parseUserAuth()
+    setIsAvaliable(true)
   })
 
-  if (!isLoading) {
+  if (!isLoading && isAvaliable) {
     return children
   }
 
