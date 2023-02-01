@@ -1,6 +1,7 @@
 import { Alert, MainContainer, Skeleton } from '@components'
 import { FILTER } from '@constants'
-import { useEffectOnce, useNotification } from '@hooks'
+import { global } from '@features'
+import { useEffectOnce, useNotification, useUsers } from '@hooks'
 import { titleCase } from '@utils'
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -8,10 +9,13 @@ import services from '../services'
 import slice from '../slice'
 
 function Threads() {
-  const [ApiThreads, { isLoading }] = services.useGetThreadsMutation()
+  const [loading, setLoading] = useState(true)
+  const [ApiThreads, threadsStatus] = services.useGetThreadsMutation()
+  const [ApiUsers, usersState] = global.services.useGetUsersMutation()
   const notification = useNotification()
   const rawThreads = useSelector(slice.state)
   const [category, setCategory] = useState(FILTER.all)
+  const { userById } = useUsers()
 
   const handleChangeCategory = (event) => {
     setCategory(event.target.value)
@@ -19,12 +23,13 @@ function Threads() {
 
   const threads = useMemo(() => {
     const lists = rawThreads?.lists || []
-    const categories = [FILTER.all, ...(rawThreads?.categories || [])].map(
-      (val) => ({
-        name: val,
-        checked: val === category,
-      })
-    )
+    const categories = [
+      {
+        name: FILTER.all,
+        count: lists.length,
+      },
+      ...(rawThreads?.categories || []),
+    ]
     if (category !== FILTER.all) {
       return {
         lists: lists.filter((val) => val.category === category),
@@ -42,10 +47,14 @@ function Threads() {
   useEffectOnce(async () => {
     try {
       await ApiThreads().unwrap()
+      await ApiUsers().unwrap()
+      setLoading(false)
     } catch (err) {
       notification.error(err)
     }
   })
+
+  const isLoading = threadsStatus.isLoading || usersState.isLoading || loading
 
   return (
     <MainContainer>
@@ -69,14 +78,17 @@ function Threads() {
                           name='category'
                           value={val.name}
                           className='peer hidden'
-                          checked={val.checked}
+                          checked={val.name === category}
                           onChange={handleChangeCategory}
                         />
                         <label
                           htmlFor={`category-${val.name}`}
-                          className='block w-full cursor-pointer rounded-md border-2 border-gray-300 bg-white py-2 px-3 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 peer-checked:border-blue-500 peer-checked:text-blue-700'
+                          className='flex w-full cursor-pointer items-center justify-between rounded-md border-2 border-gray-300 bg-white py-2 px-3 text-gray-400 transition-colors duration-300 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 peer-checked:border-blue-500 peer-checked:text-blue-500'
                         >
-                          {titleCase(val.name)}
+                          <h3>{titleCase(val.name)}</h3>
+                          <div className='flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 border-current border-opacity-50 text-sm font-semibold'>
+                            {val.count}
+                          </div>
                         </label>
                       </div>
                     )
@@ -90,7 +102,13 @@ function Threads() {
               <Alert message={threads.error} />
             ) : (
               threads.lists.map((val, idx) => {
-                return <div key={idx}>{val.title}</div>
+                const user = userById(val.ownerId)
+                return (
+                  <div key={idx}>
+                    <h2>{val.title}</h2>
+                    <span>oleh {user.name}</span>
+                  </div>
+                )
               })
             )}
           </div>

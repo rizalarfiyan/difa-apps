@@ -1,14 +1,13 @@
 import { api } from '@lib'
 import { configureStore } from '@reduxjs/toolkit'
-import { auth, leaderboards, threads } from '@features'
+import { global, auth, leaderboards, threads } from '@features'
 import { Notification } from '@components'
-import globalSlice from './slice'
 
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     notifications: Notification.slice.reducer,
-    global: globalSlice.reducer,
+    global: global.slice.reducer,
     auth: auth.slice.reducer,
     leaderboards: leaderboards.slice.reducer,
     threads: threads.slice.reducer,

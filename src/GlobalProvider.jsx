@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { auth } from '@features'
 import { storage, validAuth } from '@utils'
@@ -34,11 +34,18 @@ function GlobalProvider({ children }) {
     setIsAvaliable(true)
   })
 
+  const reason = useMemo(() => {
+    if (isLoading) {
+      return 'Fetching User Info...'
+    }
+    return 'Initialize Apps...'
+  })
+
   if (!isLoading && isAvaliable) {
     return children
   }
 
-  return <LoadingScreen reason='Fetch user info...' />
+  return <LoadingScreen reason={reason} />
 }
 
 GlobalProvider.propTypes = {

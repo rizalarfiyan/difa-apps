@@ -73,7 +73,7 @@ function NotificationMessage({ id, message, type, duration, onRemove }) {
           <div className='my-auto flex select-none font-bold text-gray-800'>
             {getStyle.name}
           </div>
-          <p className='line-clamp-2 my-auto flex break-all text-sm leading-tight text-gray-500'>
+          <p className='my-auto flex break-all text-sm leading-tight text-gray-500 line-clamp-2'>
             {message}
           </p>
         </div>

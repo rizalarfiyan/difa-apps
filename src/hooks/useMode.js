@@ -1,11 +1,11 @@
 import { MODE, STORAGE_KEY } from '@constants'
 import { storage } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
-import global from '../slice'
+import { global } from '@features'
 
 const useMode = () => {
   const dispatch = useDispatch()
-  const globalData = useSelector(global.state)
+  const globalData = useSelector(global.slice.state)
 
   const getInitialMode = () => {
     const getStorage = storage.get(STORAGE_KEY.theme)
@@ -16,7 +16,7 @@ const useMode = () => {
   }
 
   const setMode = (mode = undefined) => {
-    dispatch(global.action.setDarkMode(mode))
+    dispatch(global.slice.action.setDarkMode(mode))
   }
 
   return {

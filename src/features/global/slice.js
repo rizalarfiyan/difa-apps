@@ -1,9 +1,11 @@
 import { MODE, STORAGE_KEY } from '@constants'
 import { createSlice } from '@reduxjs/toolkit'
 import { storage } from '@utils'
+import api from './services'
 
 const initialState = {
   isDark: false,
+  users: {},
 }
 
 const slice = createSlice({
@@ -19,6 +21,17 @@ const slice = createSlice({
       storage.set(STORAGE_KEY.theme, mode)
       document.documentElement.dataset.mode = mode
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      api.endpoints.getUsers.matchFulfilled,
+      (state, { payload }) => {
+        state.users = payload.data.users.reduce(
+          (acc, val) => ({ ...acc, [val.id]: val }),
+          {}
+        )
+      }
+    )
   },
 })
 

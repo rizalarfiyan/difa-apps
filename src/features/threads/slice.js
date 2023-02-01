@@ -14,9 +14,18 @@ const slice = createSlice({
       api.endpoints.getThreads.matchFulfilled,
       (state, { payload }) => {
         state.lists = payload.data.threads
-        state.categories = [
-          ...new Set(payload.data.threads.map(({ category }) => category)),
-        ]
+        const categories = payload.data.threads.reduce((acc, { category }) => {
+          if (!acc[category]) {
+            acc[category] = {
+              name: category,
+              count: 1,
+            }
+          } else {
+            acc[category].count += 1
+          }
+          return acc
+        }, {})
+        state.categories = Object.values(categories)
       }
     )
   },
