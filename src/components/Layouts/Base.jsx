@@ -15,7 +15,7 @@ function BaseLayout() {
   return (
     <>
       <Navbar>
-        <div className='flex items-center gap-2'>
+        <div className='flex flex-wrap items-center justify-center gap-2'>
           <Button
             className='rounded-full bg-transparent !px-2 text-blue-500 hover:bg-blue-50 focus:bg-blue-100 active:bg-blue-50'
             type='button'

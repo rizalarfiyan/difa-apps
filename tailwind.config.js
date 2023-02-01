@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -13,5 +14,5 @@ module.exports = {
       container: false,
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 }

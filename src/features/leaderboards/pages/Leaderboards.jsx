@@ -1,5 +1,6 @@
 import { Alert, Card, MainContainer, Skeleton } from '@components'
 import { useEffectOnce, useNotification } from '@hooks'
+import { classNames } from '@utils'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import services from '../services'
@@ -31,9 +32,14 @@ function Leaderboards() {
             </h1>
             <div className='my-auto ml-4 flex-grow border-t border-gray-200 dark:border-gray-600' />
           </div>
-          <div className='mb-12 flex flex-col gap-3'>
+          <div
+            className={classNames(
+              'mb-12 flex flex-col xxs:gap-3',
+              isLoading ? 'gap-3' : 'gap-8'
+            )}
+          >
             {isLoading ? (
-              Array.from({ length: 3 }).map((val, idx) => {
+              Array.from({ length: 10 }).map((val, idx) => {
                 return <Skeleton.Leaderboards key={idx} />
               })
             ) : !leaderboards.length > 0 ? (
