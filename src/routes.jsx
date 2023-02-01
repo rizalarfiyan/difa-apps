@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useLocation, useRoutes } from 'react-router-dom'
-import { auth, leaderboards } from '@features'
-import Pages from '@pages'
+import { auth, leaderboards, threads } from '@features'
 import { ROUTE } from '@constants'
 import { Error, GuardedRoute, Layouts } from '@components'
 import { progress } from '@lib'
@@ -33,11 +32,11 @@ function AppRoutes() {
         },
         {
           path: ROUTE.threads,
-          element: <Pages.Threads />,
+          element: <threads.pages.Threads />,
         },
         {
           path: ROUTE.threadDetail,
-          element: <Pages.ThreadDetail />,
+          element: <threads.pages.ThreadDetail />,
         },
         {
           path: ROUTE.leaderboards,
