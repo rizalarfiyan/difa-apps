@@ -4,12 +4,20 @@ import { COMPONENTS } from '@constants'
 
 const useNotification = () => {
   const dispatch = useDispatch()
+
+  const getMessage = (message) => {
+    if (typeof message === 'object') {
+      return message?.error || message?.status || 'Something Wrong!'
+    }
+    return message
+  }
+
   return {
     success: (message, duration) => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.success,
-          message,
+          message: getMessage(message),
           duration,
         })
       )
@@ -18,7 +26,7 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.error,
-          message,
+          message: getMessage(message),
           duration,
         })
       )
@@ -27,7 +35,7 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.info,
-          message,
+          message: getMessage(message),
           duration,
         })
       )
@@ -36,7 +44,7 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.warning,
-          message,
+          message: getMessage(message),
           duration,
         })
       )

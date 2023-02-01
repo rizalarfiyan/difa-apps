@@ -1,8 +1,7 @@
-import { Alert, MainContainer, Skeleton } from '@components'
+import { Alert, MainContainer, RadioCategory, Skeleton } from '@components'
 import { FILTER } from '@constants'
 import { global } from '@features'
 import { useEffectOnce, useNotification, useUsers } from '@hooks'
-import { titleCase } from '@utils'
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import services from '../services'
@@ -69,28 +68,17 @@ function Threads() {
                 ? Array.from({ length: 4 }).map((_val, idx) => {
                     return <Skeleton.ThreadsCategory key={idx} />
                   })
-                : threads.categories.map((val, idx) => {
+                : threads.categories.map(({ name, count }, idx) => {
                     return (
-                      <div key={idx}>
-                        <input
-                          type='radio'
-                          id={`category-${val.name}`}
-                          name='category'
-                          value={val.name}
-                          className='peer hidden'
-                          checked={val.name === category}
-                          onChange={handleChangeCategory}
-                        />
-                        <label
-                          htmlFor={`category-${val.name}`}
-                          className='flex w-full cursor-pointer items-center justify-between rounded-md border-2 border-gray-300 bg-white py-2 px-3 text-gray-400 transition-colors duration-300 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 peer-checked:border-blue-500 peer-checked:text-blue-500'
-                        >
-                          <h3>{titleCase(val.name)}</h3>
-                          <div className='flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 border-current border-opacity-50 text-sm font-semibold'>
-                            {val.count}
-                          </div>
-                        </label>
-                      </div>
+                      <RadioCategory
+                        key={idx}
+                        name={name}
+                        value={name}
+                        id={`category-${name}`}
+                        checkedValue={category}
+                        onChange={handleChangeCategory}
+                        count={count}
+                      />
                     )
                   })}
             </div>
