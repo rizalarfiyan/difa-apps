@@ -31,4 +31,8 @@ const MODE = {
   light: 'light',
 }
 
-export { APP_NAME, API_BASE_URL, ROUTE, STORAGE_KEY, COMPONENTS, MODE }
+const FILTER = {
+  all: 'All',
+}
+
+export { APP_NAME, API_BASE_URL, ROUTE, STORAGE_KEY, COMPONENTS, MODE, FILTER }

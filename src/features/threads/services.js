@@ -2,24 +2,30 @@ import { api } from '@lib'
 
 const services = api.injectEndpoints({
   endpoints: (builder) => ({
-    threads: builder.mutation({
+    getThreads: builder.mutation({
       query: () => ({
         url: 'threads',
         method: 'GET',
       }),
+      providesTags: (result = []) => [
+        ...result.map(({ id }) => ({ type: 'Thread', id })),
+        { type: 'Thread', id: 'LIST' },
+      ],
     }),
-    create: builder.mutation({
+    addThread: builder.mutation({
       query: (body) => ({
         url: 'threads',
         method: 'POST',
         body,
       }),
+      invalidatesTags: [{ type: 'Thread', id: 'LIST' }],
     }),
-    detail: builder.mutation({
+    getThread: builder.mutation({
       query: () => ({
         url: 'thread',
         method: 'GET',
       }),
+      providesTags: (_thread, _err, id) => [{ type: 'Thread', id }],
     }),
   }),
 })

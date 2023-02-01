@@ -7,6 +7,10 @@ const services = api.injectEndpoints({
         url: 'leaderboards',
         method: 'GET',
       }),
+      providesTags: (result = []) => [
+        ...result.map((val) => ({ type: 'Leaderboard', id: val.user.id })),
+        { type: 'Leaderboard', id: 'LIST' },
+      ],
     }),
   }),
 })

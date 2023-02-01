@@ -3,6 +3,7 @@ import api from './services'
 
 const initialState = {
   lists: [],
+  categories: [],
 }
 
 const slice = createSlice({
@@ -10,9 +11,12 @@ const slice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addMatcher(
-      api.endpoints.threads.matchFulfilled,
+      api.endpoints.getThreads.matchFulfilled,
       (state, { payload }) => {
         state.lists = payload.data.threads
+        state.categories = [
+          ...new Set(payload.data.threads.map(({ category }) => category)),
+        ]
       }
     )
   },

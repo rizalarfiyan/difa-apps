@@ -44,6 +44,7 @@ const baseQueryWithProgress = async (args, api, extraOptions) => {
 const api = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithProgress,
+  tagTypes: ['Leaderboard', 'Thread'],
   endpoints: () => ({}),
 })
 

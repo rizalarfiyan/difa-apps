@@ -1,6 +1,6 @@
 import { api } from '@lib'
 import { configureStore } from '@reduxjs/toolkit'
-import { auth, leaderboards } from '@features'
+import { auth, leaderboards, threads } from '@features'
 import { Notification } from '@components'
 import globalSlice from './slice'
 
@@ -11,6 +11,7 @@ const store = configureStore({
     global: globalSlice.reducer,
     auth: auth.slice.reducer,
     leaderboards: leaderboards.slice.reducer,
+    threads: threads.slice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(api.middleware)
