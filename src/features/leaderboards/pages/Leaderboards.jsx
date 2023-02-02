@@ -1,4 +1,4 @@
-import { Alert, Card, MainContainer, Skeleton } from '@components'
+import { Alert, Card, HeadingTitle, MainContainer, Skeleton } from '@components'
 import { useEffectOnce, useNotification } from '@hooks'
 import { classNames } from '@utils'
 import React, { useMemo } from 'react'
@@ -26,12 +26,7 @@ function Leaderboards() {
     <MainContainer>
       <div className='container'>
         <div className='mx-auto max-w-3xl'>
-          <div className='relative mb-10 flex items-start justify-center'>
-            <h1 className='text-2xl font-semibold text-gray-700 dark:text-white'>
-              Leaderboards of active users
-            </h1>
-            <div className='my-auto ml-4 flex-grow border-t border-gray-200 dark:border-gray-600' />
-          </div>
+          <HeadingTitle title='Leaderboards of active users' />
           <div
             className={classNames(
               'mb-12 flex flex-col xxs:gap-3',

@@ -1,3 +1,4 @@
 import Leaderboards from './Leaderboards'
+import Threads from './Threads'
 
-export default { Leaderboards }
+export default { Leaderboards, Threads }

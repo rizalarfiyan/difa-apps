@@ -5,7 +5,7 @@ const ROUTE = {
   login: '/login',
   register: '/register',
   threads: '/',
-  threadDetail: '/threads/:id',
+  threadDetail: '/thread/:id',
   leaderboards: '/leaderboards',
 }
 

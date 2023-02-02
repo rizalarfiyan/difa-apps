@@ -1,4 +1,11 @@
-import { Alert, MainContainer, RadioCategory, Skeleton } from '@components'
+import {
+  Alert,
+  Card,
+  HeadingTitle,
+  MainContainer,
+  RadioCategory,
+  Skeleton,
+} from '@components'
 import { FILTER } from '@constants'
 import { global } from '@features'
 import { useEffectOnce, useNotification, useUsers } from '@hooks'
@@ -58,12 +65,10 @@ function Threads() {
   return (
     <MainContainer>
       <div className='container'>
-        <div className='flex justify-between gap-6'>
-          <div className='w-60 space-y-4'>
-            <h1 className='text-2xl font-semibold text-gray-700 dark:text-white'>
-              Category
-            </h1>
-            <div className='flex w-full flex-col gap-2'>
+        <div className='flex flex-wrap justify-between gap-6 md:flex-nowrap'>
+          <div className='w-full space-y-4 md:w-60'>
+            <HeadingTitle title='Category' className='mb-8' />
+            <div className='mg:gap-3 flex w-full flex-row flex-wrap gap-2 md:flex-col'>
               {isLoading
                 ? Array.from({ length: 4 }).map((_val, idx) => {
                     return <Skeleton.ThreadsCategory key={idx} />
@@ -84,21 +89,22 @@ function Threads() {
             </div>
           </div>
           <div className='w-full'>
-            {isLoading ? (
-              <span>Loading....</span>
-            ) : !threads.lists.length > 0 ? (
-              <Alert message={threads.error} />
-            ) : (
-              threads.lists.map((val, idx) => {
-                const user = userById(val.ownerId)
-                return (
-                  <div key={idx}>
-                    <h2>{val.title}</h2>
-                    <span>oleh {user.name}</span>
-                  </div>
-                )
-              })
-            )}
+            <HeadingTitle title='Threads active' className='mb-8' />
+            <div className='mb-12 flex flex-col gap-4'>
+              {isLoading ? (
+                Array.from({ length: 4 }).map((_val, idx) => {
+                  return <Skeleton.Thread key={idx} />
+                })
+              ) : !threads.lists.length > 0 ? (
+                <Alert message={threads.error} />
+              ) : (
+                threads.lists.map((val, idx) => {
+                  return (
+                    <Card.Threads key={idx} userById={userById} thread={val} />
+                  )
+                })
+              )}
+            </div>
           </div>
         </div>
       </div>

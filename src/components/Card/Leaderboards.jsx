@@ -20,7 +20,7 @@ function Leaderboards({ num, user, score }) {
           </span>
         </div>
       </div>
-      <div className='p- absolute right-0 -top-6 mr-0 rounded-full bg-white p-1.5 xxs:relative xxs:top-0 xxs:mr-2 xxs:rounded-none xxs:p-0'>
+      <div className='p- absolute right-0 -top-6 mr-0 rounded-full bg-white p-1.5 dark:bg-gray-600 xxs:relative xxs:top-0 xxs:mr-2 xxs:rounded-none xxs:p-0 xxs:dark:bg-transparent'>
         <div className='flex h-10 w-10 items-center justify-center rounded-full border-2 border-blue-500 font-semibold text-blue-500 dark:border-blue-200 dark:text-blue-200'>
           {score}
         </div>

@@ -10,9 +10,9 @@ const useUsers = () => {
     if (!user) {
       return {
         id: '',
-        name: '',
+        name: 'Rizal Arfiyan',
         avatar: '',
-        email: '',
+        email: 'admin@admin.com',
       }
     }
     return user

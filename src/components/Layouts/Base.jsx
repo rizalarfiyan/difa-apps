@@ -17,8 +17,9 @@ function BaseLayout() {
       <Navbar>
         <div className='flex flex-wrap items-center justify-center gap-2'>
           <Button
-            className='rounded-full bg-transparent !px-2 text-blue-500 hover:bg-blue-50 focus:bg-blue-100 active:bg-blue-50'
+            className='rounded-full !px-2'
             type='button'
+            variant='outline-info'
             onClick={handleToggleMode}
           >
             <Icon name={isDark ? 'light' : 'dark'} className='h-5 w-5' />

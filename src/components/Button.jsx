@@ -18,6 +18,14 @@ function Button({
 }) {
   const getVariant = useMemo(() => {
     switch (variant) {
+      case 'outline-danger':
+        return 'border-current bg-transparent text-red-600 hover:bg-red-50 focus:border-red-500 focus:ring-red-500 active:bg-red-100 dark:text-red-300 dark:hover:bg-opacity-10'
+      case 'outline-warning':
+        return 'border-current bg-transparent text-yellow-600 hover:bg-yellow-50 focus:border-yellow-500 focus:ring-yellow-500 active:bg-yellow-100 dark:text-yellow-300 dark:hover:bg-opacity-10'
+      case 'outline-success':
+        return 'border-current bg-transparent text-green-600 hover:bg-green-50 focus:border-green-500 focus:ring-green-500 active:bg-green-100 dark:text-green-300 dark:hover:bg-opacity-10'
+      case 'outline-info':
+        return 'border-current bg-transparent text-blue-600 hover:bg-blue-50 focus:border-blue-500 focus:ring-blue-500 active:bg-blue-100 dark:text-blue-300 dark:hover:bg-opacity-10'
       case 'danger':
         return 'border-red-600 bg-red-500 text-white hover:bg-red-600 focus:border-red-500 focus:bg-red-700 focus:ring-red-500 active:bg-red-600'
       case 'warning':
@@ -90,7 +98,16 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   isSubmit: PropTypes.bool,
   isFluid: PropTypes.bool,
-  variant: PropTypes.oneOf(['danger', 'warning', 'success', 'info']),
+  variant: PropTypes.oneOf([
+    'danger',
+    'warning',
+    'success',
+    'info',
+    'outline-danger',
+    'outline-warning',
+    'outline-success',
+    'outline-info',
+  ]),
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 }
 

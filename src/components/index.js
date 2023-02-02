@@ -12,6 +12,7 @@ import GuardedRoute from './GuardedRoute'
 import UserDropdown from './UserDropdown'
 import Alert from './Alert'
 import RadioCategory from './RadioCategory'
+import HeadingTitle from './HeadingTitle'
 import Button from './Button'
 import Icon from './Icon'
 import Notification from './Notification'
@@ -33,6 +34,7 @@ export {
   UserDropdown,
   Alert,
   RadioCategory,
+  HeadingTitle,
   Error,
   Layouts,
   Notification,

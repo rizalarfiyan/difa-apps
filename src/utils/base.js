@@ -69,10 +69,32 @@ const timeAgo = (date) => {
     { label: 'minute', seconds: 60 },
     { label: 'second', seconds: 1 },
   ]
-  const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
+  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000)
   const interval = intervals.find((i) => i.seconds < seconds)
   const count = Math.floor(seconds / interval.seconds)
   return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`
+}
+
+const htmlTags = (str, isRemove = false) => {
+  if (str === null || str === '') return ''
+
+  const entities = {
+    amp: '&',
+    apos: "'",
+    '#x27': "'",
+    '#x2F': '/',
+    '#39': "'",
+    '#47': '/',
+    lt: '<',
+    gt: '>',
+    nbsp: ' ',
+    quot: '"',
+  }
+  const currentStr = str.replace(/&([^;]+);/gm, (match, entity) => {
+    return entities[entity] || match
+  })
+  if (!isRemove) return currentStr
+  return currentStr.toString().replace(/(<([^>]+)>)/gi, '')
 }
 
 export {
@@ -85,4 +107,5 @@ export {
   getAvatar,
   titleCase,
   timeAgo,
+  htmlTags,
 }
