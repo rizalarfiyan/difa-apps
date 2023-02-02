@@ -1,4 +1,5 @@
 import api from './api'
 import progress from './progress'
+import middleware from './middleware'
 
-export { api, progress }
+export { api, progress, middleware }

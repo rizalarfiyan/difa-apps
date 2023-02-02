@@ -1,4 +1,4 @@
-import { api } from '@lib'
+import { api, middleware } from '@lib'
 import { configureStore } from '@reduxjs/toolkit'
 import { global, auth, leaderboards, threads } from '@features'
 import { Notification } from '@components'
@@ -13,7 +13,10 @@ const store = configureStore({
     threads: threads.slice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(api.middleware)
+    return getDefaultMiddleware().concat([
+      api.middleware,
+      middleware.rtkQueryErrorHandle,
+    ])
   },
 })
 

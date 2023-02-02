@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@constants'
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { progress } from '@lib'
 
 const nprogress = {
@@ -28,11 +28,11 @@ const baseQuery = fetchBaseQuery({
     return headers
   },
 })
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 })
+
 const baseQueryWithProgress = async (args, api, extraOptions) => {
   try {
     nprogress.start()
-    const result = await baseQueryWithRetry(args, api, extraOptions)
+    const result = await baseQuery(args, api, extraOptions)
     nprogress.complete()
     return result
   } catch (err) {

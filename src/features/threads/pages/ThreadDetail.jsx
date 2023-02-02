@@ -20,10 +20,6 @@ function ThreadDetail() {
     }
   })
 
-  if (threadStatus?.error?.status === 404 || !threadId) {
-    return <Error.NotFoundError />
-  }
-
   const threadData = useMemo(() => {
     if (!thread.detail) {
       return {
@@ -58,6 +54,10 @@ function ThreadDetail() {
       comments: thread.comments,
     }
   }, [thread.detail, thread.comments])
+
+  if (threadStatus?.error?.status === 404 || !threadId) {
+    return <Error.NotFoundError />
+  }
 
   return (
     <MainContainer>
