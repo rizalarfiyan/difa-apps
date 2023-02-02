@@ -60,6 +60,21 @@ const useActionThread = ({
     neutralVoteState.isLoading,
   ])
 
+  useEffect(() => {
+    if (!me) {
+      setAction((prev) => ({
+        like: {
+          ...prev.like,
+          isActive: false,
+        },
+        dislike: {
+          ...prev.dislike,
+          isActive: false,
+        },
+      }))
+    }
+  }, [me])
+
   const backLogin = () => {
     notification.info('Please login first!')
     navigate(ROUTE.login, {

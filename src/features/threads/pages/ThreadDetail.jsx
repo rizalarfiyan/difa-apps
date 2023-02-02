@@ -86,7 +86,7 @@ function ThreadDetail() {
                   )
                 })}
           </div>
-          <Card.CommentForm id={threadId} />
+          {!threadStatus.isLoading && <Card.CommentForm id={threadId} />}
         </div>
       </div>
     </MainContainer>

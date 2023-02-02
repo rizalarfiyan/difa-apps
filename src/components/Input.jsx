@@ -80,7 +80,9 @@ function Input({
           <p
             className={classNames(
               'mt-1 text-right text-sm',
-              isLimit ? 'text-red-500 dark:text-red-400' : 'text-gray-600'
+              isLimit
+                ? 'text-red-500 dark:text-red-400'
+                : 'text-gray-600 dark:text-gray-300'
             )}
           >
             {length}/{limit}

@@ -20,6 +20,8 @@ function Comment({ threadId, comment }) {
     hasDislike: comment.downVotesBy.includes(me?.id) || 0,
   })
 
+  const isMe = comment.owner.id === me?.id
+
   return (
     <div className='relative flex flex-col gap-5 rounded-md border-2 border-transparent bg-white p-4 shadow-lg transition-colors duration-300 hover:border-blue-500 dark:bg-gray-600 sm:p-6 md:p-8'>
       <div className='flex items-center justify-between gap-3'>
@@ -28,9 +30,16 @@ function Comment({ threadId, comment }) {
             <img src={comment.owner.avatar} alt={comment.owner.name} />
           </div>
           <div className='flex flex-col'>
-            <h5 className='font-semibold text-gray-700 dark:text-white'>
-              {comment.owner.name}
-            </h5>
+            <div className='flex items-center gap-2'>
+              <h5 className='font-semibold text-gray-700 dark:text-white'>
+                {comment.owner.name}
+              </h5>
+              {isMe && (
+                <span className='block rounded-[4px] bg-blue-500 px-2 py-[1px] text-xs text-white'>
+                  me
+                </span>
+              )}
+            </div>
             <span className='text-sm text-gray-500 dark:text-gray-200'>
               {timeAgo(comment.createdAt)}
             </span>

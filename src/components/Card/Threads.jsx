@@ -28,6 +28,8 @@ function Threads({ thread, owner, enableFormat, enableTruncate, showComment }) {
     hasDislike: thread.downVotesBy.includes(me?.id) || 0,
   })
 
+  const isMe = owner.id === me?.id
+
   return (
     <div className='relative flex flex-col gap-5 rounded-md border-2 border-transparent bg-white p-4 shadow-lg transition-colors duration-300 hover:border-blue-500 dark:bg-gray-600 sm:p-6 md:p-8'>
       <Link to={routeReplace(ROUTE.threadDetail, thread.id)}>
@@ -41,9 +43,16 @@ function Threads({ thread, owner, enableFormat, enableTruncate, showComment }) {
             <img src={owner.avatar} alt={owner.name} />
           </div>
           <div className='flex flex-col'>
-            <h5 className='font-semibold text-gray-700 dark:text-white'>
-              {owner.name}
-            </h5>
+            <div className='flex items-center gap-2'>
+              <h5 className='font-semibold text-gray-700 dark:text-white'>
+                {owner.name}
+              </h5>
+              {isMe && (
+                <span className='block rounded-[4px] bg-blue-500 px-2 py-[1px] text-xs text-white'>
+                  me
+                </span>
+              )}
+            </div>
             <span className='text-sm text-gray-500 dark:text-gray-200'>
               {timeAgo(thread.createdAt)}
             </span>
