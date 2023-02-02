@@ -12,6 +12,7 @@ function Input({
   onChange,
   value,
   error,
+  className,
   ...rest
 }) {
   const [length, setLength] = useState(0)
@@ -60,7 +61,8 @@ function Input({
           hasErrorLimit
             ? 'dark border-red-300 bg-red-50 text-red-900 placeholder:text-red-400 focus:outline-red-500 focus:ring-red-500'
             : 'border-gray-300 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-500 dark:text-white dark:placeholder:text-gray-300',
-          Element === 'textarea' && 'max-h-[220px] min-h-[44px]'
+          Element === 'textarea' && 'max-h-[220px] min-h-[44px]',
+          className
         )}
         onChange={handleChange}
         value={value}
@@ -97,6 +99,7 @@ Input.defaultProps = {
   onChange: () => {},
   value: '',
   error: '',
+  className: '',
 }
 
 Input.propTypes = {
@@ -109,6 +112,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   error: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default Input

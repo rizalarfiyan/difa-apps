@@ -21,8 +21,8 @@ const services = api.injectEndpoints({
       invalidatesTags: [{ type: 'Thread', id: 'LIST' }],
     }),
     getThread: builder.mutation({
-      query: () => ({
-        url: 'thread',
+      query: (id) => ({
+        url: `threads/${id}`,
         method: 'GET',
       }),
       providesTags: (_thread, _err, id) => [{ type: 'Thread', id }],
@@ -50,6 +50,41 @@ const services = api.injectEndpoints({
       }),
       providesTags: (_thread, _err, id) => [
         { type: 'Thread', id: `neutral-${id}` },
+      ],
+    }),
+    addComment: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `threads/${id}/comments`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'Thread', id: 'LIST' }],
+    }),
+    upCommentThread: builder.mutation({
+      query: (threadId, commentId) => ({
+        url: `threads/${threadId}/comments/${commentId}/up-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [
+        { type: 'Thread', id: `comment-up-${id}` },
+      ],
+    }),
+    downCommentThread: builder.mutation({
+      query: (threadId, commentId) => ({
+        url: `threads/${threadId}/comments/${commentId}/down-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [
+        { type: 'Thread', id: `comment-down-${id}` },
+      ],
+    }),
+    neutralCommentThread: builder.mutation({
+      query: (threadId, commentId) => ({
+        url: `threads/${threadId}/comments/${commentId}/neutral-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [
+        { type: 'Thread', id: `comment-neutral-${id}` },
       ],
     }),
   }),

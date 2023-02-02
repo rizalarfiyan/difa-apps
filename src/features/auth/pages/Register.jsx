@@ -54,7 +54,7 @@ function Register() {
                 title='Name'
                 type='text'
                 name='name'
-                placeholder='Write yout name...'
+                placeholder='Write your name...'
                 error={errors.name}
                 value={values.name}
                 onChange={handleChange}
@@ -65,7 +65,7 @@ function Register() {
                 title='Email'
                 type='email'
                 name='email'
-                placeholder='Write yout email...'
+                placeholder='Write your email...'
                 error={errors.email}
                 value={values.email}
                 onChange={handleChange}
@@ -76,7 +76,7 @@ function Register() {
                 title='Password'
                 type='password'
                 name='password'
-                placeholder='Write yout password...'
+                placeholder='Write your password...'
                 error={errors.password}
                 value={values.password}
                 onChange={handleChange}
@@ -87,7 +87,7 @@ function Register() {
                 title='Password Confirmation'
                 type='password'
                 name='password_confirmation'
-                placeholder='Write yout password confirmation...'
+                placeholder='Write your password confirmation...'
                 error={errors.password_confirmation}
                 value={values.password_confirmation}
                 onChange={handleChange}

@@ -2,7 +2,9 @@ import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { classNames } from '@utils'
 
-function Alert({ message, variant }) {
+function Alert({ message, children, variant }) {
+  if (!message && !children) return ''
+
   const getVariant = useMemo(() => {
     switch (variant) {
       case 'danger':
@@ -24,17 +26,20 @@ function Alert({ message, variant }) {
       )}
       role='alert'
     >
-      <span>{message}</span>
+      <span>{children || message}</span>
     </div>
   )
 }
 
 Alert.defaultProps = {
+  message: null,
+  children: null,
   variant: 'info',
 }
 
 Alert.propTypes = {
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
+  children: PropTypes.node,
   variant: PropTypes.oneOf(['danger', 'warning', 'success', 'info']),
 }
 

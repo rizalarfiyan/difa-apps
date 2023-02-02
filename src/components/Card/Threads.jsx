@@ -6,12 +6,18 @@ import { Button, Icon } from '@components'
 import { ROUTE } from '@constants'
 import { useUsers } from '@hooks'
 import { threads } from '@features'
+import format from 'html-react-parser'
 
-function Threads({ thread }) {
+function Threads({ thread, owner, enableFormat, enableTruncate, showComment }) {
+  if (!thread || !owner) return ''
+
   const { me, userById } = useUsers()
-
-  const user = userById(thread.ownerId)
-  const content = htmlTags(thread.body, true)
+  const content = enableFormat
+    ? format(thread.body)
+    : htmlTags(thread.body, true)
+  if (typeof owner === 'string') {
+    owner = userById(owner)
+  }
 
   const { action, handleLike, handleDislike } = threads.hooks.useActionThread({
     id: thread.id,
@@ -32,11 +38,11 @@ function Threads({ thread }) {
       <div className='flex items-center justify-between gap-3'>
         <div className='flex items-center justify-between gap-3'>
           <div className='h-14 w-14 min-w-[56px] overflow-hidden rounded-md bg-gray-200 dark:bg-gray-400'>
-            <img src={user.avatar} alt={user.name} />
+            <img src={owner.avatar} alt={owner.name} />
           </div>
           <div className='flex flex-col'>
             <h5 className='font-semibold text-gray-700 dark:text-white'>
-              {user.name}
+              {owner.name}
             </h5>
             <span className='text-sm text-gray-500 dark:text-gray-200'>
               {timeAgo(thread.createdAt)}
@@ -47,7 +53,12 @@ function Threads({ thread }) {
           {thread.category}
         </div>
       </div>
-      <div className='text-gray-600 line-clamp-3 dark:text-gray-300'>
+      <div
+        className={classNames(
+          'text-gray-600 dark:text-gray-300',
+          enableTruncate && 'line-clamp-3'
+        )}
+      >
         {content}
       </div>
       <div className='flex items-center gap-3'>
@@ -75,13 +86,23 @@ function Threads({ thread }) {
         >
           {action.dislike.count}
         </Button>
-        <div className='inline-flex h-9 min-h-[2.25rem] flex-shrink-0 select-none items-center justify-center whitespace-nowrap rounded-md bg-transparent px-4 align-middle text-base font-medium leading-5 text-gray-600 outline-none duration-75 ease-out hover:bg-gray-50 active:bg-gray-100 dark:text-white dark:hover:bg-opacity-10'>
-          <Icon name='comment' className='mr-2 h-5 w-5' />
-          <span>{thread.totalComments}</span>
-        </div>
+        {showComment && (
+          <div className='inline-flex h-9 min-h-[2.25rem] flex-shrink-0 select-none items-center justify-center whitespace-nowrap rounded-md bg-transparent px-4 align-middle text-base font-medium leading-5 text-gray-600 outline-none duration-75 ease-out hover:bg-gray-50 active:bg-gray-100 dark:text-white dark:hover:bg-opacity-10'>
+            <Icon name='comment' className='mr-2 h-5 w-5' />
+            <span>{thread.totalComments}</span>
+          </div>
+        )}
       </div>
     </div>
   )
+}
+
+Threads.defaultProps = {
+  thread: null,
+  owner: null,
+  enableFormat: false,
+  enableTruncate: false,
+  showComment: false,
 }
 
 Threads.propTypes = {
@@ -91,11 +112,21 @@ Threads.propTypes = {
     body: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
-    ownerId: PropTypes.string.isRequired,
     totalComments: PropTypes.number.isRequired,
     upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
     downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  }),
+  owner: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+    }),
+  ]),
+  enableFormat: PropTypes.bool,
+  enableTruncate: PropTypes.bool,
+  showComment: PropTypes.bool,
 }
 
 export default Threads

@@ -9,6 +9,6 @@
   margin: 0 auto;
 }
 
-input[type="radio"]:checked+label {
+input[type='radio']:checked + label {
   @apply border-blue-500 text-blue-700;
 }

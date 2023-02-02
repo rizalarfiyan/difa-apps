@@ -55,7 +55,7 @@ function Login() {
                 title='Email'
                 type='email'
                 name='email'
-                placeholder='Write yout email...'
+                placeholder='Write your email...'
                 error={errors.email}
                 value={values.email}
                 onChange={handleChange}
@@ -66,7 +66,7 @@ function Login() {
                 title='Password'
                 type='password'
                 name='password'
-                placeholder='Write yout password...'
+                placeholder='Write your password...'
                 error={errors.password}
                 value={values.password}
                 onChange={handleChange}

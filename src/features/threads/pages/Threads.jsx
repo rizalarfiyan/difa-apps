@@ -38,7 +38,7 @@ function Threads() {
     if (category !== FILTER.all) {
       return {
         lists: lists.filter((val) => val.category === category),
-        error: `Data of thread category ${category} not found`,
+        error: `Data of thread category "${category}" not found`,
         categories,
       }
     }
@@ -88,7 +88,7 @@ function Threads() {
             </div>
           </div>
           <div className='w-full'>
-            <HeadingTitle title='Threads active' className='mb-8' />
+            <HeadingTitle title='Available Threads' className='mb-8' />
             <div className='mb-12 flex flex-col gap-4'>
               {isLoading ? (
                 Array.from({ length: 4 }).map((_val, idx) => {
@@ -98,7 +98,15 @@ function Threads() {
                 <Alert message={threads.error} />
               ) : (
                 threads.lists.map((val, idx) => {
-                  return <Card.Threads key={idx} thread={val} />
+                  return (
+                    <Card.Threads
+                      key={idx}
+                      thread={val}
+                      owner={val.ownerId}
+                      showComment
+                      enableTruncate
+                    />
+                  )
                 })
               )}
             </div>
