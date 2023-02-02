@@ -1,11 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { classNames, getAvatar } from '@utils'
 import { useAuth, useClickOutside, useNotification } from '@hooks'
-import { ROUTE } from '@constants'
-import { Link, Icon } from '@components'
 
 function UserDropdown() {
-  const { isLoggedIn, user, logout } = useAuth()
+  const { user, logout } = useAuth()
   const notification = useNotification()
 
   const wrapperRef = useRef(null)
@@ -21,17 +19,6 @@ function UserDropdown() {
   useClickOutside(() => {
     setIsOpen(false)
   }, wrapperRef)
-
-  if (!isLoggedIn) {
-    return (
-      <Link
-        to={ROUTE.login}
-        rightIcon={<Icon name='login' className='ml-2 h-5 w-5' />}
-      >
-        Login
-      </Link>
-    )
-  }
 
   return (
     <div className='relative' ref={wrapperRef}>

@@ -2,10 +2,11 @@ import React from 'react'
 import { Button, Icon, Link, Navbar, UserDropdown } from '@components'
 import { Outlet } from 'react-router-dom'
 import { ROUTE } from '@constants'
-import { useMode } from '@hooks'
+import { useAuth, useMode } from '@hooks'
 
 function BaseLayout() {
   const { isDark, setMode } = useMode()
+  const { isLoggedIn } = useAuth()
 
   const handleToggleMode = (event) => {
     setMode()
@@ -36,10 +37,27 @@ function BaseLayout() {
           >
             Leaderboards
           </Link>
-          <UserDropdown />
+          {isLoggedIn ? (
+            <UserDropdown />
+          ) : (
+            <Link
+              to={ROUTE.login}
+              rightIcon={<Icon name='login' className='ml-2 h-5 w-5' />}
+            >
+              Login
+            </Link>
+          )}
         </div>
       </Navbar>
       <Outlet />
+      {isLoggedIn && (
+        <Link
+          to={ROUTE.createThread}
+          className='!fixed bottom-8 right-8 rounded-full bg-white !px-2.5 !py-6 dark:bg-gray-500'
+        >
+          <Icon name='plus' className='h-7 w-7' />
+        </Link>
+      )}
     </>
   )
 }

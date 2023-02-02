@@ -31,6 +31,15 @@ function AppRoutes() {
           ],
         },
         {
+          element: <GuardedRoute requireAuth />,
+          children: [
+            {
+              path: ROUTE.createThread,
+              element: <threads.pages.CreateThread />,
+            },
+          ],
+        },
+        {
           path: ROUTE.threads,
           element: <threads.pages.Threads />,
         },
