@@ -8,7 +8,7 @@ import {
 } from '@components'
 import { FILTER } from '@constants'
 import { global } from '@features'
-import { useEffectOnce, useNotification, useUsers } from '@hooks'
+import { useEffectOnce, useNotification } from '@hooks'
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import services from '../services'
@@ -21,7 +21,6 @@ function Threads() {
   const notification = useNotification()
   const rawThreads = useSelector(slice.state)
   const [category, setCategory] = useState(FILTER.all)
-  const { userById } = useUsers()
 
   const handleChangeCategory = (event) => {
     setCategory(event.target.value)
@@ -99,9 +98,7 @@ function Threads() {
                 <Alert message={threads.error} />
               ) : (
                 threads.lists.map((val, idx) => {
-                  return (
-                    <Card.Threads key={idx} userById={userById} thread={val} />
-                  )
+                  return <Card.Threads key={idx} thread={val} />
                 })
               )}
             </div>

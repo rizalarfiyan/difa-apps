@@ -27,6 +27,31 @@ const services = api.injectEndpoints({
       }),
       providesTags: (_thread, _err, id) => [{ type: 'Thread', id }],
     }),
+    upVoteThread: builder.mutation({
+      query: (id) => ({
+        url: `threads/${id}/up-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [{ type: 'Thread', id: `up-${id}` }],
+    }),
+    downVoteThread: builder.mutation({
+      query: (id) => ({
+        url: `threads/${id}/down-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [
+        { type: 'Thread', id: `down-${id}` },
+      ],
+    }),
+    neutralVoteThread: builder.mutation({
+      query: (id) => ({
+        url: `threads/${id}/neutral-vote`,
+        method: 'POST',
+      }),
+      providesTags: (_thread, _err, id) => [
+        { type: 'Thread', id: `neutral-${id}` },
+      ],
+    }),
   }),
 })
 

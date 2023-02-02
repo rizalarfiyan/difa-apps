@@ -7,7 +7,12 @@ const useNotification = () => {
 
   const getMessage = (message) => {
     if (typeof message === 'object') {
-      return message?.error || message?.status || 'Something Wrong!'
+      return (
+        message?.data?.message ||
+        message?.error ||
+        message?.status ||
+        'Something Wrong!'
+      )
     }
     return message
   }

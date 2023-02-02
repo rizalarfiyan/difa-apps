@@ -69,10 +69,22 @@ function Button({
       )}
       {...rest}
     >
-      {leftIcon && !isLoading ? leftIcon : null}
+      {leftIcon ? (
+        isLoading ? (
+          <span className='opacity-0'>{leftIcon}</span>
+        ) : (
+          leftIcon
+        )
+      ) : null}
       {isLoading && <Spinner className='absolute mr-0' size='sm' />}
       {isLoading ? <span className='opacity-0'>{children}</span> : children}
-      {rightIcon && !isLoading ? rightIcon : null}
+      {rightIcon ? (
+        isLoading ? (
+          <span className='opacity-0'>{rightIcon}</span>
+        ) : (
+          rightIcon
+        )
+      ) : null}
     </button>
   )
 }

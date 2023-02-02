@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
-import { global } from '@features'
+import { auth, global } from '@features'
 
 const useUsers = () => {
   const globalData = useSelector(global.slice.state)
+  const authData = useSelector(auth.slice.state)
 
   const arrUsers = Object.values(globalData.users)
   const findUserById = (userId) => {
@@ -19,6 +20,7 @@ const useUsers = () => {
   }
 
   return {
+    me: authData.user,
     users: arrUsers,
     userById: findUserById,
   }
