@@ -69,8 +69,8 @@ const timeAgo = (date) => {
     { label: 'minute', seconds: 60 },
     { label: 'second', seconds: 1 },
   ]
-  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000)
-  const interval = intervals.find((i) => i.seconds < seconds)
+  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000) + 1
+  const interval = intervals.find((i) => i.seconds <= seconds)
   const count = Math.floor(seconds / interval.seconds)
   return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`
 }
@@ -97,6 +97,16 @@ const htmlTags = (str, isRemove = false) => {
   return currentStr.toString().replace(/(<([^>]+)>)/gi, '')
 }
 
+const sortDate = (arr, keyCallback, isAscending = false) => {
+  const arrSort = [...arr].sort((a, b) => {
+    return (
+      new Date(keyCallback(a)).getTime() - new Date(keyCallback(b)).getTime()
+    )
+  })
+  if (!isAscending) return arrSort
+  return arrSort.reverse()
+}
+
 export {
   classNames,
   getYear,
@@ -108,4 +118,5 @@ export {
   titleCase,
   timeAgo,
   htmlTags,
+  sortDate,
 }

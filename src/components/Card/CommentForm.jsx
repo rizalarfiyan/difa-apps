@@ -5,20 +5,25 @@ import { useNotification, useRouter, useUsers } from '@hooks'
 import { Formik, Form } from 'formik'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-function CommentForm() {
+function CommentForm({ id }) {
   const { me } = useUsers()
   const { pathname } = useRouter()
 
   const formValue = {
-    message: '',
+    content: '',
   }
   const [addComent, { isLoading }] = threads.services.useAddCommentMutation()
   const notification = useNotification()
   const handleSubmit = async (values, formik) => {
     try {
-      await addComent(values).unwrap()
+      await addComent({
+        id,
+        content: values.comment,
+      }).unwrap()
       notification.success('Success add Comment!')
+      formik.resetForm(formValue)
     } catch (err) {
       notification.error(err)
     }
@@ -89,6 +94,10 @@ function CommentForm() {
       </Formik>
     </div>
   )
+}
+
+CommentForm.propTypes = {
+  id: PropTypes.string.isRequired,
 }
 
 export default CommentForm

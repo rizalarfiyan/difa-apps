@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const cracoAlias = require('craco-alias')
 
 module.exports = {

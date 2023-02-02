@@ -61,8 +61,8 @@ const services = api.injectEndpoints({
       invalidatesTags: [{ type: 'Thread', id: 'LIST' }],
     }),
     upCommentThread: builder.mutation({
-      query: (threadId, commentId) => ({
-        url: `threads/${threadId}/comments/${commentId}/up-vote`,
+      query: ({ threadId, id }) => ({
+        url: `threads/${threadId}/comments/${id}/up-vote`,
         method: 'POST',
       }),
       providesTags: (_thread, _err, id) => [
@@ -70,8 +70,8 @@ const services = api.injectEndpoints({
       ],
     }),
     downCommentThread: builder.mutation({
-      query: (threadId, commentId) => ({
-        url: `threads/${threadId}/comments/${commentId}/down-vote`,
+      query: ({ threadId, id }) => ({
+        url: `threads/${threadId}/comments/${id}/down-vote`,
         method: 'POST',
       }),
       providesTags: (_thread, _err, id) => [
@@ -79,8 +79,8 @@ const services = api.injectEndpoints({
       ],
     }),
     neutralCommentThread: builder.mutation({
-      query: (threadId, commentId) => ({
-        url: `threads/${threadId}/comments/${commentId}/neutral-vote`,
+      query: ({ threadId, id }) => ({
+        url: `threads/${threadId}/comments/${id}/neutral-vote`,
         method: 'POST',
       }),
       providesTags: (_thread, _err, id) => [
