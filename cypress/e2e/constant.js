@@ -1,4 +1,4 @@
-const { ROUTE } = require('../../src/constants')
+const { ROUTE, SKELETON } = require('../../src/constants')
 
 const element = {
   name: 'form input[name="name"]',
@@ -28,7 +28,7 @@ const endpoint = {
 }
 
 const page = {
-  leaderboards: 10,
+  leaderboards: SKELETON.leaderboards,
 }
 
 module.exports = {

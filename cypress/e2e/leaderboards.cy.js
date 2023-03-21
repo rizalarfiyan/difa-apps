@@ -22,9 +22,8 @@ describe('Leaderboards spec', () => {
       page.leaderboards
     )
     cy.wait('@leaderboards').its('response.statusCode').should('eq', 200)
-    cy.get('#leaderboards > div:not([role="status"])').should(
-      'have.length',
-      page.leaderboards
-    )
+    cy.get(
+      '#leaderboards > div:not([role="status"]):not([role="alert"])'
+    ).should('have.length', page.leaderboards)
   })
 })
