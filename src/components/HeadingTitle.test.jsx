@@ -8,7 +8,7 @@ const data = {
 }
 
 describe('HeadingTitle component', () => {
-  it('should handle title correctly', async () => {
+  it('should handle title correctly', () => {
     render(<HeadingTitle data-testid='headingTitle' title={data.title} />)
     expect(screen.getByTestId('headingTitle')).toHaveTextContent(data.title)
   })

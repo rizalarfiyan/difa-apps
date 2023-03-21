@@ -11,7 +11,7 @@ const data = {
 }
 
 describe('Button component', () => {
-  it('should handle children correctly', async () => {
+  it('should handle children correctly', () => {
     render(<Button data-testid='button'>{data.message}</Button>)
     expect(screen.getByTestId('button').textContent).toBe(data.message)
   })

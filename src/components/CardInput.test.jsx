@@ -9,7 +9,7 @@ const data = {
 }
 
 describe('CardInput component', () => {
-  it('should handle title correctly', async () => {
+  it('should handle title correctly', () => {
     render(
       <CardInput data-testid='cardinput' title={data.title}>
         {data.content}
@@ -18,7 +18,7 @@ describe('CardInput component', () => {
     expect(screen.getByTestId('cardinput')).toHaveTextContent(data.title)
   })
 
-  it('should handle children correctly', async () => {
+  it('should handle children correctly', () => {
     render(
       <CardInput data-testid='cardinput' title={data.title}>
         {data.content}
