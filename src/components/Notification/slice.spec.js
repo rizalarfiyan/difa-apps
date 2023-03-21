@@ -13,7 +13,7 @@ const payloadData = {
 describe('slice of notification components', () => {
   test('should return the initial state when given by unknown action', () => {
     const nextState = slice.reducer(slice.initialState, { type: 'unknown' })
-    expect(nextState).toBe(slice.initialState)
+    expect(nextState).toStrictEqual(slice.initialState)
   })
 
   test('should return add reducer', () => {

@@ -39,4 +39,5 @@ export default {
   state: (state) => state.global,
   reducer: slice.reducer,
   action: slice.actions,
+  initialState,
 }
