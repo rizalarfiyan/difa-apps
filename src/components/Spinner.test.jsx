@@ -3,6 +3,16 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Spinner from './Spinner'
 
+/*
+ * test scenarios for Spinner component
+ *
+ * - should handle size xs correctly
+ * - should handle size sm correctly
+ * - should handle size md correctly
+ * - should handle size lg correctly
+ * - should handle size xl correctly
+ *
+ */
 describe('Spinner component', () => {
   it('should handle size xs correctly', () => {
     render(<Spinner size='xs' data-testid='spinner' />)

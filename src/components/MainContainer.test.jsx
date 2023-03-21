@@ -8,6 +8,14 @@ const data = {
   className: 'test-class',
 }
 
+/*
+ * test scenarios for MainContainer component
+ *
+ * - should handle children correctly
+ * - should handle is center correctly
+ * - should handle className correctly
+ *
+ */
 describe('MainContainer component', () => {
   it('should handle children correctly', () => {
     render(

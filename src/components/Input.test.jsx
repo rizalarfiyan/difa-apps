@@ -11,6 +11,20 @@ const data = {
   error: 'This is error',
 }
 
+/*
+ * test scenarios for Input component
+ *
+ * - should show correctly
+ * - should handle title correctly
+ * - should handle element as input correctly
+ * - should handle element as textarea correctly
+ * - should handle limit correctly
+ * - should handle empty limit correctly
+ * - should handle value correctly
+ * - should handle error correctly
+ * - should handle empty error correctly
+ *
+ */
 describe('Input component', () => {
   it('should show correctly', () => {
     render(

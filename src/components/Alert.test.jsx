@@ -7,6 +7,17 @@ const data = {
   message: 'ini adalah alert',
 }
 
+/*
+ * test scenarios for Alert component
+ *
+ * - should handle message correctly
+ * - should handle children correctly
+ * - should handle variant danger correctly
+ * - should handle variant warning
+ * - should handle variant success
+ * - should handle variant info correctly
+ *
+ */
 describe('Alert component', () => {
   it('should handle message correctly', () => {
     render(<Alert message={data.message} />)

@@ -10,6 +10,35 @@ const data = {
   icon: <Icon name='info' data-testid='svg-icon' />,
 }
 
+/*
+ * test scenarios for Button component
+ *
+ * - should handle children
+ * - should call onClick when enabled
+ * - should not call onClick when disable
+ * - should handle not disabled
+ * - should handle disabled
+ * - should have type button
+ * - should have type submit
+ * - should handle is fluid
+ * - should have right icon
+ * - should have left icon
+ * - should handle is loading
+ * - should handle size xs
+ * - should handle size sm
+ * - should handle size lg
+ * - should handle size xl
+ * - should handle size md
+ * - should handle variant danger
+ * - should handle variant warning
+ * - should handle variant success
+ * - should handle variant info
+ * - should handle size variant outline danger
+ * - should handle size variant outline warning
+ * - should handle size variant outline success
+ * - should handle size variant outline info
+ *
+ */
 describe('Button component', () => {
   it('should handle children correctly', () => {
     render(<Button data-testid='button'>{data.message}</Button>)

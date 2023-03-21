@@ -10,6 +10,14 @@ const payloadData = {
   },
 }
 
+/*
+ * test scenarios for slice of notification components
+ *
+ * - should return the initial state when given by unknown action
+ * - should return add reducer
+ * - should return remove reducer
+ *
+ */
 describe('slice of notification components', () => {
   test('should return the initial state when given by unknown action', () => {
     const nextState = slice.reducer(slice.initialState, { type: 'unknown' })

@@ -9,6 +9,15 @@ const data = {
   name: 'info',
 }
 
+/*
+ * test scenarios for Icon component
+ *
+ * - should not handle name correctly
+ * - should handle name correctly
+ * - should handle height correctly
+ * - should handle width correctly
+ *
+ */
 describe('Icon component', () => {
   it('should not handle name correctly', () => {
     render(<Icon name='notfound' data-testid='icon' />)

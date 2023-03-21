@@ -5,7 +5,16 @@ const hasTokenData = {
   token: 'this is a token',
 }
 
-describe('slice of global data', () => {
+/*
+ * test scenarios for slice of auth
+ *
+ * - should return the initial state when given by unknown action
+ * - should return logout reducer
+ * - should return filled addToken when given by filled addToken action
+ * - should return empty addToken when given by empty addToken action
+ *
+ */
+describe('slice of auth', () => {
   test('should return the initial state when given by unknown action', () => {
     const nextState = slice.reducer(slice.initialState, { type: 'unknown' })
     expect(nextState).toStrictEqual(slice.initialState)

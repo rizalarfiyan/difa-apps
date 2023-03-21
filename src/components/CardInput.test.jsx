@@ -8,6 +8,13 @@ const data = {
   content: 'This is content',
 }
 
+/*
+ * test scenarios for CardInput component
+ *
+ * - should handle title correctly
+ * - should handle children correctly
+ *
+ */
 describe('CardInput component', () => {
   it('should handle title correctly', () => {
     render(
