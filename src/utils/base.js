@@ -70,7 +70,8 @@ const timeAgo = (date) => {
     { label: 'second', seconds: 1 },
   ]
   const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000) + 1
-  const interval = intervals.find((i) => i.seconds <= seconds)
+  const interval =
+    intervals.find((i) => i.seconds <= seconds) ?? intervals[intervals.length]
   const count = Math.floor(seconds / interval.seconds)
   return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`
 }
