@@ -1,34 +1,43 @@
 const { route, element, data, endpoint } = require('./constant')
 
 /**
- * - Login spec
+ * - Register spec
  *
- * - should display login page correctly
+ * - should display register page correctly
+ * - should display error message when name is empty
  * - should display error message when email is empty
  * - should display error message when email is invalid
  * - should display input email correctly
  * - should display error message when password is empty
  * - should display error message when password is less than 6
  * - should display error message when password is more than 255
- * - should display error message when username and password are wrong
- * - should display success message login page correctly
- * - should display success message logout page correctly
+ * - should display error message when password confirmation is empty
+ * - should display error message when password confirmation not match to password
+ * - should display error message when email is already taken
+ * - should display success message register page correctly
  *
  */
-describe('Login spec', () => {
+describe('Register spec', () => {
   beforeEach(() => {
-    cy.visit(route.login)
-    cy.intercept('POST', endpoint.login).as('login')
+    cy.visit(route.register)
+    cy.intercept('POST', endpoint.register).as('register')
     cy.intercept('GET', endpoint.me).as('me')
-    cy.intercept('GET', endpoint.threads).as('threads')
-    cy.intercept('GET', endpoint.users).as('users')
   })
 
-  it('should display login page correctly', () => {
+  it('should display register page correctly', () => {
+    cy.get(element.name).should('be.visible')
     cy.get(element.email).should('be.visible')
     cy.get(element.password).should('be.visible')
+    cy.get(element.passwordConfirmation).should('be.visible')
     cy.get(element.button)
-      .contains(/^Login$/)
+      .contains(/^Register$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when name is empty', () => {
+    cy.get(element.name).focus().blur()
+    cy.get(element.name + element.error)
+      .contains(/is a required field$/)
       .should('be.visible')
   })
 
@@ -75,60 +84,50 @@ describe('Login spec', () => {
       .should('be.visible')
   })
 
-  it('should display error message when username and password are wrong', () => {
-    cy.get(element.email).type(data.email)
-    cy.get(element.password).type('passwd')
-    cy.get(element.button)
-      .contains(/^Login$/)
-      .click()
-    cy.wait('@login').its('response.statusCode').should('eq', 401)
-    cy.get(element.notification)
-      .eq(0)
-      .find('p')
-      .contains(/email or password is wrong$/)
+  it('should display error message when password confirmation is empty', () => {
+    cy.get(element.passwordConfirmation).focus().blur()
+    cy.get(element.passwordConfirmation + element.error)
+      .contains(/is a required field$/)
       .should('be.visible')
   })
 
-  it('should display success message login page correctly', () => {
-    cy.get(element.email).type(data.email)
-    cy.get(element.password).type(data.password)
-    cy.get(element.button)
-      .contains(/^Login$/)
-      .click()
-    cy.wait('@login').its('response.statusCode').should('eq', 200)
-    cy.get(element.notification)
-      .eq(0)
-      .find('p')
-      .contains(/Success Login!$/)
+  it('should display error message when password confirmation not match to password', () => {
+    cy.get(element.password).type(data.password).blur()
+    cy.get(element.passwordConfirmation).type('passwordd').blur()
+    cy.get(element.passwordConfirmation + element.error)
+      .contains(/must match$/)
       .should('be.visible')
   })
 
-  it('should display success message logout page correctly', () => {
+  it('should display error message when email is already taken', () => {
+    cy.get(element.name).type(data.name)
     cy.get(element.email).type(data.email)
     cy.get(element.password).type(data.password)
+    cy.get(element.passwordConfirmation).type(data.password)
     cy.get(element.button)
-      .contains(/^Login$/)
+      .contains(/^Register$/)
       .click()
-    cy.wait('@login').its('response.statusCode').should('eq', 200)
-    cy.wait('@me').its('response.statusCode').should('eq', 200)
+    cy.wait('@register').its('response.statusCode').should('eq', 400)
     cy.get(element.notification)
       .eq(0)
       .find('p')
-      .contains(/Success Login!$/)
+      .contains(/email is already taken$/)
       .should('be.visible')
+  })
 
-    cy.wait('@threads').its('response.statusCode').should('eq', 200)
-    cy.wait('@users').its('response.statusCode').should('eq', 200)
-    cy.get(element.dropdown).find('div[aria-hidden="true"]').click()
-    cy.get(element.dropdown)
-      .find('button')
-      .contains(/^Logout$/)
-      .should('be.visible')
+  it('should display success message register page correctly', () => {
+    cy.get(element.name).type(data.name)
+    cy.get(element.email).type(data.uniqEmail)
+    cy.get(element.password).type(data.password)
+    cy.get(element.passwordConfirmation).type(data.password)
+    cy.get(element.button)
+      .contains(/^Register$/)
       .click()
+    cy.wait('@register').its('response.statusCode').should('eq', 201)
     cy.get(element.notification)
       .eq(0)
       .find('p')
-      .contains(/Success Logout!$/)
+      .contains(/Success Register$/)
       .should('be.visible')
   })
 })
