@@ -32,6 +32,7 @@ function Leaderboards() {
               'mb-12 flex flex-col xxs:gap-3',
               isLoading ? 'gap-3' : 'gap-8'
             )}
+            id='leaderboards'
           >
             {isLoading ? (
               Array.from({ length: 10 }).map((val, idx) => {

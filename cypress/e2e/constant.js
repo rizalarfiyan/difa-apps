@@ -24,11 +24,17 @@ const endpoint = {
   me: /v1\/users\/me$/gm,
   threads: /v1\/threads$/gm,
   users: /v1\/users$/gm,
+  leaderboards: /v1\/leaderboards$/gm,
+}
+
+const page = {
+  leaderboards: 10,
 }
 
 module.exports = {
   element,
   data,
   endpoint,
+  page,
   route: ROUTE,
 }
