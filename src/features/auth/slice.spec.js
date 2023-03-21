@@ -1,8 +1,8 @@
 import slice from './slice'
 
-const isDarkData = {
+const hasTokenData = {
   ...slice.initialState,
-  isDark: true,
+  token: 'this is a token',
 }
 
 describe('slice of global data', () => {
@@ -11,23 +11,25 @@ describe('slice of global data', () => {
     expect(nextState).toStrictEqual(slice.initialState)
   })
 
-  test('should return reset reducer', () => {
-    const nextState = slice.reducer(isDarkData, slice.action.reset())
+  test('should return logout reducer', () => {
+    const nextState = slice.reducer(hasTokenData, slice.action.logout())
     expect(nextState).toStrictEqual(slice.initialState)
   })
 
-  test('should return setDarkMode true when given by setDarkMode true action', () => {
+  test('should return filled addToken when given by filled addToken action', () => {
     const nextState = slice.reducer(
       slice.initialState,
-      slice.action.setDarkMode(true)
+      slice.action.addToken({ token: hasTokenData.token })
     )
-    expect(nextState).toStrictEqual(isDarkData)
+    expect(nextState).toStrictEqual(hasTokenData)
   })
 
-  test('should return setDarkMode true when given by setDarkMode false action', () => {
+  test('should return empty addToken when given by empty addToken action', () => {
     const nextState = slice.reducer(
       slice.initialState,
-      slice.action.setDarkMode(false)
+      slice.action.addToken({
+        token: null,
+      })
     )
     expect(nextState).toStrictEqual(slice.initialState)
   })
