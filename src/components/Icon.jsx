@@ -29,7 +29,7 @@ const iconData = {
   plus: 'M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z',
 }
 
-function Icon({ name, width, height, className }) {
+function Icon({ name, width, height, className, ...rest }) {
   if (!iconData[name]) {
     return ''
   }
@@ -43,6 +43,7 @@ function Icon({ name, width, height, className }) {
       fill='currentColor'
       aria-hidden='true'
       className={className}
+      {...rest}
     >
       <path d={iconData[name]} />
     </svg>
