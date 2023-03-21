@@ -9,13 +9,21 @@ const data = {
 }
 
 describe('CardInput component', () => {
-  it('should handle children correctly', async () => {
+  it('should handle title correctly', async () => {
     render(
       <CardInput data-testid='cardinput' title={data.title}>
         {data.content}
       </CardInput>
     )
     expect(screen.getByTestId('cardinput')).toHaveTextContent(data.title)
+  })
+
+  it('should handle children correctly', async () => {
+    render(
+      <CardInput data-testid='cardinput' title={data.title}>
+        {data.content}
+      </CardInput>
+    )
     expect(screen.getByTestId('cardinput')).toHaveTextContent(data.content)
   })
 })

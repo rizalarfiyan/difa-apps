@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { classNames } from '@utils'
 
-function HeadingTitle({ title, className }) {
+function HeadingTitle({ title, className, ...rest }) {
   return (
     <div
       className={classNames(
         'relative flex items-start justify-center',
         className
       )}
+      {...rest}
     >
       <h1 className='text-2xl font-semibold text-gray-700 dark:text-white'>
         {title}
