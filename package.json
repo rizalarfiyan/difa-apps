@@ -12,7 +12,8 @@
     "eslint": "eslint --ignore-path .gitignore --max-warnings=0 . --ext .js,.jsx,.ts,.tsx --fix",
     "eslint:check": "eslint1 --ignore-path .gitignore --max-warnings=0 --ext .js,.jsx,.ts,.tsx .",
     "prettier": "prettier --ignore-path .gitignore --write ./src",
-    "prettier:check": "prettier --ignore-path .gitignore --check ./src"
+    "prettier:check": "prettier --ignore-path .gitignore --check ./src",
+    "e2e": "cypress run"
   },
   "dependencies": {
     "@craco/craco": "^7.0.0",
@@ -35,10 +36,12 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "craco-alias": "^3.0.1",
+    "cypress": "^12.8.1",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",

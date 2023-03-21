@@ -69,7 +69,7 @@ function NotificationMessage({ id, message, type, duration, onRemove }) {
           />
         )}
 
-        <div className='flex-no-wrap flex w-full flex-col px-1'>
+        <div className='content flex-no-wrap flex w-full flex-col px-1'>
           <div className='my-auto flex select-none font-bold text-gray-800'>
             {getStyle.name}
           </div>

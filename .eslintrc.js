@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: [
     'plugin:react/recommended',
@@ -14,7 +15,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'jest'],
+  plugins: ['react', 'jest', 'cypress'],
   settings: {
     'import/resolver': {
       alias: {

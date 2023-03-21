@@ -21,7 +21,7 @@ function UserDropdown() {
   }, wrapperRef)
 
   return (
-    <div className='relative' ref={wrapperRef}>
+    <div className='relative' ref={wrapperRef} id='user-dropdown'>
       <div
         className='ml-2 h-9 w-9 cursor-pointer overflow-hidden rounded-full bg-gray-200 dark:bg-gray-400'
         onClick={toggleDropdown}
