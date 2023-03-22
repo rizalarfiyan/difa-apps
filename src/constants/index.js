@@ -38,6 +38,8 @@ const FILTER = {
 
 const SKELETON = {
   leaderboards: 10,
+  category: 4,
+  threads: 4,
 }
 
 export {

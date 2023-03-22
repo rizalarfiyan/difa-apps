@@ -27,14 +27,10 @@ const endpoint = {
   leaderboards: /v1\/leaderboards$/gm,
 }
 
-const page = {
-  leaderboards: SKELETON.leaderboards,
-}
-
 module.exports = {
   element,
   data,
   endpoint,
-  page,
+  skeleton: SKELETON,
   route: ROUTE,
 }
