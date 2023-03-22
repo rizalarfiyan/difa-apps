@@ -1,4 +1,4 @@
-const { route, element, data, endpoint } = require('./constant')
+const { route, element, data, endpoint } = require('./constants')
 
 /**
  * - Login spec
@@ -96,6 +96,7 @@ describe('Login spec', () => {
       .contains(/^Login$/)
       .click()
     cy.wait('@login').its('response.statusCode').should('eq', 200)
+    cy.wait('@me').its('response.statusCode').should('eq', 200)
     cy.get(element.notification)
       .eq(0)
       .find('p')

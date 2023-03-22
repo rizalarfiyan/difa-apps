@@ -1,4 +1,4 @@
-const { route, skeleton, endpoint } = require('./constant')
+const { route, skeleton, endpoint } = require('./constants')
 
 /**
  * - Login spec

@@ -6,7 +6,7 @@ import {
   RadioCategory,
   Skeleton,
 } from '@components'
-import { FILTER } from '@constants'
+import { FILTER, SKELETON } from '@constants'
 import { global } from '@features'
 import { useEffectOnce, useNotification } from '@hooks'
 import React, { useMemo, useState } from 'react'
@@ -67,9 +67,12 @@ function Threads() {
         <div className='flex flex-wrap justify-between gap-6 md:flex-nowrap'>
           <div className='w-full space-y-4 md:w-60'>
             <HeadingTitle title='Category' className='mb-8' />
-            <div className='mg:gap-3 flex w-full flex-row flex-wrap gap-2 md:flex-col'>
+            <div
+              id='category'
+              className='mg:gap-3 flex w-full flex-row flex-wrap gap-2 md:flex-col'
+            >
               {isLoading
-                ? Array.from({ length: 4 }).map((_val, idx) => {
+                ? Array.from({ length: SKELETON.category }).map((_val, idx) => {
                     return <Skeleton.ThreadsCategory key={idx} />
                   })
                 : threads.categories.map(({ name, count }, idx) => {
@@ -89,9 +92,9 @@ function Threads() {
           </div>
           <div className='w-full'>
             <HeadingTitle title='Available Threads' className='mb-8' />
-            <div className='mb-12 flex flex-col gap-4'>
+            <div id='threads' className='mb-12 flex flex-col gap-4'>
               {isLoading ? (
-                Array.from({ length: 4 }).map((_val, idx) => {
+                Array.from({ length: SKELETON.threads }).map((_val, idx) => {
                   return <Skeleton.Thread key={idx} />
                 })
               ) : !threads.lists.length > 0 ? (

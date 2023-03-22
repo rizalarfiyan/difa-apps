@@ -58,7 +58,7 @@ function Threads({ thread, owner, enableFormat, enableTruncate, showComment }) {
             </span>
           </div>
         </div>
-        <div className='rounded-full border-2 border-blue-500 px-4 py-1 text-blue-700 dark:text-white'>
+        <div className='category rounded-full border-2 border-blue-500 px-4 py-1 text-blue-700 dark:text-white'>
           {thread.category}
         </div>
       </div>

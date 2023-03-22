@@ -1,4 +1,4 @@
-const { route, element, data, endpoint } = require('./constant')
+const { route, element, data, endpoint } = require('./constants')
 
 /**
  * - Register spec
