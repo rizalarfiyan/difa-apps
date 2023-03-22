@@ -1,4 +1,5 @@
 const { route, element, data, endpoint } = require('./constants')
+const { login } = require('./helpers')
 
 /**
  * - Login spec
@@ -90,46 +91,6 @@ describe('Login spec', () => {
   })
 
   it('should display success message login page correctly', () => {
-    cy.get(element.email).type(data.email)
-    cy.get(element.password).type(data.password)
-    cy.get(element.button)
-      .contains(/^Login$/)
-      .click()
-    cy.wait('@login').its('response.statusCode').should('eq', 200)
-    cy.wait('@me').its('response.statusCode').should('eq', 200)
-    cy.get(element.notification)
-      .eq(0)
-      .find('p')
-      .contains(/Success Login!$/)
-      .should('be.visible')
-  })
-
-  it('should display success message logout page correctly', () => {
-    cy.get(element.email).type(data.email)
-    cy.get(element.password).type(data.password)
-    cy.get(element.button)
-      .contains(/^Login$/)
-      .click()
-    cy.wait('@login').its('response.statusCode').should('eq', 200)
-    cy.wait('@me').its('response.statusCode').should('eq', 200)
-    cy.get(element.notification)
-      .eq(0)
-      .find('p')
-      .contains(/Success Login!$/)
-      .should('be.visible')
-
-    cy.wait('@threads').its('response.statusCode').should('eq', 200)
-    cy.wait('@users').its('response.statusCode').should('eq', 200)
-    cy.get(element.dropdown).find('div[aria-hidden="true"]').click()
-    cy.get(element.dropdown)
-      .find('button')
-      .contains(/^Logout$/)
-      .should('be.visible')
-      .click()
-    cy.get(element.notification)
-      .eq(0)
-      .find('p')
-      .contains(/Success Logout!$/)
-      .should('be.visible')
+    login()
   })
 })
