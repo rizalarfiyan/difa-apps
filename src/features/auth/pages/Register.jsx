@@ -23,7 +23,7 @@ function Register() {
     const { name, email, password } = values
     try {
       await register({ name, email, password }).unwrap()
-      notification.success('Success Register')
+      notification.success('Success Register!')
       navigate(ROUTE.login)
     } catch (err) {
       notification.error(err)
