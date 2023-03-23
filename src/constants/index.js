@@ -36,4 +36,19 @@ const FILTER = {
   all: 'All',
 }
 
-export { APP_NAME, API_BASE_URL, ROUTE, STORAGE_KEY, COMPONENTS, MODE, FILTER }
+const SKELETON = {
+  leaderboards: 10,
+  category: 4,
+  threads: 4,
+}
+
+export {
+  APP_NAME,
+  API_BASE_URL,
+  ROUTE,
+  STORAGE_KEY,
+  COMPONENTS,
+  MODE,
+  FILTER,
+  SKELETON,
+}

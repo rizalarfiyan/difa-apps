@@ -1,4 +1,5 @@
 import { Alert, Card, HeadingTitle, MainContainer, Skeleton } from '@components'
+import { SKELETON } from '@constants'
 import { useEffectOnce, useNotification } from '@hooks'
 import { classNames } from '@utils'
 import React, { useMemo } from 'react'
@@ -32,9 +33,10 @@ function Leaderboards() {
               'mb-12 flex flex-col xxs:gap-3',
               isLoading ? 'gap-3' : 'gap-8'
             )}
+            id='leaderboards'
           >
             {isLoading ? (
-              Array.from({ length: 10 }).map((val, idx) => {
+              Array.from({ length: SKELETON.leaderboards }).map((val, idx) => {
                 return <Skeleton.Leaderboards key={idx} />
               })
             ) : !leaderboards.length > 0 ? (

@@ -41,4 +41,5 @@ export default {
   state: (state) => state.auth,
   reducer: slice.reducer,
   action: slice.actions,
+  initialState,
 }

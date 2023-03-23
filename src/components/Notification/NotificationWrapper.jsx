@@ -40,6 +40,7 @@ function NotificationWrapper({ position }) {
 
   return (
     <div
+      id='notifications'
       className={classNames(
         'pointer-events-none fixed z-50 max-h-screen w-full overflow-hidden p-4 md:max-w-sm md:p-4',
         getPosition

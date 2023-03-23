@@ -22,8 +22,10 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.success,
-          message: getMessage(message),
-          duration,
+          content: {
+            message: getMessage(message),
+            duration,
+          },
         })
       )
     },
@@ -31,8 +33,10 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.error,
-          message: getMessage(message),
-          duration,
+          content: {
+            message: getMessage(message),
+            duration,
+          },
         })
       )
     },
@@ -40,8 +44,10 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.info,
-          message: getMessage(message),
-          duration,
+          content: {
+            message: getMessage(message),
+            duration,
+          },
         })
       )
     },
@@ -49,8 +55,10 @@ const useNotification = () => {
       dispatch(
         Notification.slice.action.add({
           type: COMPONENTS.notification.type.warning,
-          message: getMessage(message),
-          duration,
+          content: {
+            message: getMessage(message),
+            duration,
+          },
         })
       )
     },

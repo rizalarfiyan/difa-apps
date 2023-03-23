@@ -13,6 +13,7 @@ function Input({
   value,
   error,
   className,
+  wrapper,
   ...rest
 }) {
   const [length, setLength] = useState(0)
@@ -37,7 +38,7 @@ function Input({
   }, [])
 
   return (
-    <div>
+    <div {...wrapper}>
       <label
         htmlFor={id}
         className={classNames(
@@ -102,6 +103,7 @@ Input.defaultProps = {
   value: '',
   error: '',
   className: '',
+  wrapper: {},
 }
 
 Input.propTypes = {
@@ -115,6 +117,7 @@ Input.propTypes = {
   value: PropTypes.string,
   error: PropTypes.string,
   className: PropTypes.string,
+  wrapper: PropTypes.object,
 }
 
 export default Input

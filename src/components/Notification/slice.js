@@ -14,11 +14,12 @@ const slice = createSlice({
       state.data = [
         ...state.data,
         {
-          id: (+new Date()).toString(),
+          id: payload.id || (+new Date()).toString(),
           type: payload.type,
           content: {
-            message: payload.message || '',
-            duration: payload.duration || COMPONENTS.notification.duration,
+            message: payload.content.message || '',
+            duration:
+              payload.content.duration || COMPONENTS.notification.duration,
           },
         },
       ]
@@ -33,4 +34,5 @@ export default {
   state: (state) => state.notifications.data,
   reducer: slice.reducer,
   action: slice.actions,
+  initialState,
 }
