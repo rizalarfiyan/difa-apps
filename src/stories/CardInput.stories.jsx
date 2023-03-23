@@ -2,7 +2,7 @@ import React from 'react'
 import CardInput from '../components/CardInput'
 
 const story = {
-  title: 'CardInput',
+  title: 'Card Input',
   component: CardInput,
 }
 
