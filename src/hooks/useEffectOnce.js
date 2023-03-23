@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 const useEffectOnce = (effect) => {
-  const isMounted = useRef(false)
+  const isMounted = useRef(process.env.NODE_ENV === 'production')
   useEffect(() => {
     if (isMounted.current) {
       effect()
