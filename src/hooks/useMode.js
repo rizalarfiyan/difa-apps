@@ -7,18 +7,6 @@ const useMode = () => {
   const dispatch = useDispatch()
   const globalData = useSelector(global.slice.state)
 
-  const getInitialMode = () => {
-    const getStorage = storage.get(STORAGE_KEY.theme)
-    const getUserMode = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches
-    return getStorage === MODE.dark || (!getStorage && getUserMode)
-  }
-
-  const setMode = (mode = undefined) => {
-    dispatch(global.slice.action.setDarkMode(mode))
-  }
-
   return {
     isDark: globalData.isDark,
     getInitialMode,
