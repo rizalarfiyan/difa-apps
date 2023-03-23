@@ -9,6 +9,9 @@ const element = {
   error: ' ~ div p',
   notification: '#notifications > div > *',
   dropdown: '#user-dropdown',
+  title: 'form input[name="title"]',
+  category: 'form input[name="category"]',
+  content: 'form textarea[name="content"]',
 }
 
 const data = {
@@ -16,6 +19,9 @@ const data = {
   password: 'password',
   name: `User ${+new Date()}`,
   uniqEmail: `difa.${+new Date()}@gmail.com`,
+  title: `Thread ${+new Date()}`,
+  category: 'general',
+  content: 'This is a content from testing',
 }
 
 const endpoint = {

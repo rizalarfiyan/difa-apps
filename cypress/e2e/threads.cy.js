@@ -1,5 +1,7 @@
-const { route, skeleton, element, endpoint } = require('./constants')
-const { login } = require('./helpers')
+const { route, skeleton, element, endpoint, data } = require('./constants')
+require('./helpers')
+
+const uniqTitle = data.title
 
 /**
  * - Threads spec
@@ -79,10 +81,13 @@ describe('Threads spec', () => {
         const contentLength = Cypress.$(value).length
         expect(value).to.have.length(contentLength)
 
-        cy.get('#category > div:not([role="status"])').should(
-          'have.length',
-          contentLength + 1
-        )
+        cy.get('#category > div:not([role="status"])')
+          .eq(0)
+          .find('h3 ~ div')
+          .should((value2) => {
+            const count = parseInt(value2.text() || 0, 10)
+            expect(count).to.eq(contentLength)
+          })
       }
     )
   })
@@ -201,7 +206,7 @@ describe('Threads spec', () => {
  */
 describe('Threads with login spec', () => {
   beforeEach(() => {
-    login()
+    cy.login()
     cy.visit(route.threads)
     cy.intercept('GET', endpoint.threads).as('threads')
     cy.intercept('GET', endpoint.users).as('users')
@@ -420,5 +425,150 @@ describe('Threads with login spec', () => {
         expect(afterCount).to.eq(beforeCount - 1)
       })
     })
+  })
+})
+
+/**
+ * - Create threads spec
+ *
+ * - should display count up when user click up vote
+ * - should display count down when user click down vote
+ * - should display netral count up netral when user click active up vote
+ * - should display netral count down netral when user click active down vote
+ *
+ */
+describe('Create threads spec', () => {
+  beforeEach(() => {
+    cy.login()
+    cy.visit(route.createThread)
+    cy.intercept('GET', endpoint.threads).as('threads')
+    cy.intercept('GET', endpoint.users).as('users')
+    cy.intercept('POST', endpoint.threadsUp).as('threads-up')
+    cy.intercept('POST', endpoint.threadsDown).as('threads-down')
+    cy.intercept('POST', endpoint.threadsNeutral).as('threads-neutral')
+  })
+
+  it('should display create thread page correctly', () => {
+    cy.get(element.title).should('be.visible')
+    cy.get(element.category).should('be.visible')
+    cy.get(element.content).should('be.visible')
+    cy.get(element.button).contains(/^Add$/).should('be.visible')
+  })
+
+  it('should display error message when title is empty', () => {
+    cy.get(element.title).focus().blur()
+    cy.get(element.title + element.error)
+      .contains(/is a required field$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when title is less than 6', () => {
+    cy.get(element.title).type('pass').blur()
+    cy.get(element.title + element.error)
+      .contains(/must be at least 6 characters$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when title is more than 100', () => {
+    const title = Cypress._.repeat('title ', 21)
+    cy.get(element.title).type(title, {
+      delay: 0,
+    })
+    cy.get(element.title + element.error)
+      .contains(/must be at most 100 characters$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when category is empty', () => {
+    cy.get(element.category).focus().blur()
+    cy.get(element.category + element.error)
+      .contains(/is a required field$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when category is less than 3', () => {
+    cy.get(element.category).type('ca').blur()
+    cy.get(element.category + element.error)
+      .contains(/must be at least 3 characters$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when category is more than 20', () => {
+    const category = Cypress._.repeat('category ', 3)
+    cy.get(element.category).type(category, {
+      delay: 0,
+    })
+    cy.get(element.category + element.error)
+      .contains(/must be at most 20 characters$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when content is empty', () => {
+    cy.get(element.content).focus().blur()
+    cy.get(element.content + element.error)
+      .contains(/is a required field$/)
+      .should('be.visible')
+  })
+
+  it('should display error message when content is less than 10', () => {
+    cy.get(element.content).type('ca').blur()
+    cy.get(element.content + element.error)
+      .contains(/must be at least 10 characters$/)
+      .should('be.visible')
+  })
+
+  it('should display success message create thread page correctly', () => {
+    cy.get(element.title).type(uniqTitle).focus()
+    cy.get(element.category).type(data.category)
+    cy.get(element.content).type(data.content)
+    cy.get(element.button).contains(/^Add$/).click()
+
+    cy.get(element.notification)
+      .eq(0)
+      .find('p')
+      .contains(/Success Add Thread!$/)
+      .should('be.visible')
+  })
+
+  it('should display thread has me in page correctly', () => {
+    cy.get('header a')
+      .contains(/^Threads$/)
+      .click()
+
+    cy.get('#category > [role="status"]').should(
+      'have.length',
+      skeleton.category
+    )
+    cy.get('#threads > [role="status"]').should('have.length', skeleton.threads)
+
+    cy.wait('@threads').its('response.statusCode').should('eq', 200)
+    cy.wait('@users').its('response.statusCode').should('eq', 200)
+
+    cy.get('#threads h2')
+      .contains(uniqTitle)
+      .closest('.relative')
+      .find('span')
+      .contains('me')
+  })
+
+  it('should display thread has category in page correctly', () => {
+    cy.get('header a')
+      .contains(/^Threads$/)
+      .click()
+
+    cy.get('#category > [role="status"]').should(
+      'have.length',
+      skeleton.category
+    )
+    cy.get('#threads > [role="status"]').should('have.length', skeleton.threads)
+
+    cy.wait('@threads').its('response.statusCode').should('eq', 200)
+    cy.wait('@users').its('response.statusCode').should('eq', 200)
+
+    cy.get('#threads h2')
+      .contains(uniqTitle)
+      .closest('.relative')
+      .find('.category')
+      .contains(data.category)
   })
 })
