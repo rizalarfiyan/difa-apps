@@ -127,7 +127,7 @@ describe('Register spec', () => {
     cy.get(element.notification)
       .eq(0)
       .find('p')
-      .contains(/Success Register$/)
+      .contains(/Success Register!$/)
       .should('be.visible')
   })
 })
