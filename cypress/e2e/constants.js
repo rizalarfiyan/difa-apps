@@ -23,6 +23,9 @@ const endpoint = {
   register: /v1\/register$/gm,
   me: /v1\/users\/me$/gm,
   threads: /v1\/threads$/gm,
+  threadsUp: /v1\/threads\/(thread-.*)\/up-vote$/gm,
+  threadsDown: /v1\/threads\/(thread-.*)\/down-vote$/gm,
+  threadsNeutral: /v1\/threads\/(thread-.*)\/neutral-vote$/gm,
   users: /v1\/users$/gm,
   leaderboards: /v1\/leaderboards$/gm,
 }

@@ -2,17 +2,9 @@ const { route, element, endpoint } = require('./constants')
 const { login } = require('./helpers')
 
 /**
- * - Login spec
+ * - Logout spec
  *
- * - should display login page correctly
- * - should display error message when email is empty
- * - should display error message when email is invalid
- * - should display input email correctly
- * - should display error message when password is empty
- * - should display error message when password is less than 6
- * - should display error message when password is more than 255
- * - should display error message when username and password are wrong
- * - should display success message login page correctly
+ * - should display dropdown logout page correctly
  * - should display success message logout page correctly
  *
  */
