@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+<h1 align="center" style="margin-bottom:0">Difa Apps</h1>
+<p align="center">Created by <a href="https://github.com/rizalarfiyan/" target="_blank">Rizal Arfiyan</a> by <span style="color:red">&#10084;</span></p><br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Asupan Wareg adalah sebuah project forum restaurant dengan memanfaatkan API yang digunakan sebagai tugas submission kelas **Menjadi React Web Developer Expert** di [Dicoding](https://www.dicoding.com/).
 
-## Available Scripts
+> **PERINGATAN**:\
+> Sesuai dengan terms of use di Dicoding, submission kelas [Dicoding Academy](https://www.dicoding.com/) haruslah hasil karya Anda sendiri. Kode yang didapatkan dari sumber lain (GitHub) hanya digunakan sebagai referensi.
+> **Gunakan repository ini dengan bijak!**
 
-In the project directory, you can run:
+<br />
 
-### `npm start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Install dependencies
+$ npm run install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Menjalankan web server pada mode development
+$ npm run start
 
-### `npm test`
+# Membuild hasil development pada mode production
+$ npm run build
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Menjalan unit test mode development (watch)
+$ npm run test
 
-### `npm run build`
+# Membenarkan code style, error dengan eslint and prettier
+$ npm run lint
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Mengecheck code style, error dengan eslint and prettier
+$ npm run check
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Membenarkan code style, error dengan eslint
+$ npm run eslint
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Mengecheck code style, error dengan eslint
+$ npm run eslint:check
 
-### `npm run eject`
+# Membenarkan code style, error dengan prettier
+$ npm run prettier
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Mengecheck code style, error dengan prettier
+$ npm run prettier:check
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Menjalankan end to end testing
+$ npm run e2e
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Menjalankan unit testing dan end to end pada mode continous integration
+$ npm run ci:test
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Menjalankan storybook
+$ npm run storybook
 
-## Learn More
+# Membuild hasil storybook ke mode production
+$ npm run build-storybook
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
