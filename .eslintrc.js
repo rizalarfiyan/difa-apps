@@ -3,35 +3,22 @@ module.exports = {
     browser: true,
     es2021: true,
     'jest/globals': true,
-    'cypress/globals': true,
+    'cypress/globals': true
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:prettier/recommended', 'plugin:storybook/recommended'],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: ['react', 'jest', 'cypress'],
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['@', './src'],
-          ['@components', './src/components'],
-          ['@styles', './src/styles'],
-          ['@utils', './src/utils'],
-          ['@constants', './src/constants'],
-          ['@features', './src/features'],
-          ['@lib', './src/lib'],
-          ['@hooks', './src/hooks'],
-        ],
-        extensions: ['.js', '.jsx', '.json'],
-      },
-    },
+        map: [['@', './src'], ['@components', './src/components'], ['@styles', './src/styles'], ['@utils', './src/utils'], ['@constants', './src/constants'], ['@features', './src/features'], ['@lib', './src/lib'], ['@hooks', './src/hooks']],
+        extensions: ['.js', '.jsx', '.json']
+      }
+    }
   },
   rules: {
     'react/prefer-stateless-function': 0,
@@ -42,6 +29,6 @@ module.exports = {
     'no-nested-ternary': 0,
     'react/forbid-prop-types': 0,
     'no-param-reassign': 0,
-    'import/prefer-default-export': 0,
-  },
-}
+    'import/prefer-default-export': 0
+  }
+};
